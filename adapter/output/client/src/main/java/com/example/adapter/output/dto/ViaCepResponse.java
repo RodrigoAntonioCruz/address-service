@@ -1,6 +1,4 @@
-package com.example.adapter.output.dto.response;
-
-package com.example.adapter.output.client.dto;
+package com.example.adapter.output.dto;
 
 import lombok.Builder;
 
@@ -10,6 +8,11 @@ public record ViaCepResponse(
         String logradouro,
         String bairro,
         String localidade,
-        String uf
+        String uf,
+        String estado,
+        String regiao,
+        String ibge,
+        String ddd,
+        String siafi
 ) {
 }

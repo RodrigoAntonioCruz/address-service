@@ -1,6 +1,6 @@
 package com.example.adapter.output.client;
 
-import com.example.adapter.output.dto.response.ViaCepResponse;
+import com.example.adapter.output.dto.ViaCepResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,5 +9,4 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface ViaCepClient {
     @GetMapping("/{cep}/json/")
     ViaCepResponse getAddress(@PathVariable("cep") String cep);
-
 }
