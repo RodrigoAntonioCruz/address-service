@@ -77,7 +77,7 @@ services:
 #    networks:
 #      - app-net
 #
-#  spring-app:
+#  app:
 #    build: .
 #    container_name: spring-app
 #    depends_on:
@@ -115,25 +115,6 @@ services:
 #      # MongoDB
 #      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_HOST}:${MONGO_INITDB_PORT}/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=spring-app&directConnection=true&ssl=false
 #
-#      # Kafka
-#      SPRING_KAFKA_MAX_BLOCK_MS: 10000
-#      SPRING_KAFKA_BOOTSTRAP_SERVERS: localhost:9092
-#      SPRING_KAFKA_AUTO_OFFSET_RESET: earliest
-#      SPRING_KAFKA_AUTO_CREATE_TOPICS: false
-#      SPRING_KAFKA_MAX_ATTEMPT_RETRY: 4
-#      SPRING_KAFKA_GROUP_ID: spring.kafka.group-id
-#      SPRING_KAFKA_TOPIC_ORDER_NAME: topic-order-dev
-#
-#      # Logs
-#      LOG_LEVEL: INFO
-#      LOGGING_LEVEL_ROOT: ${LOG_LEVEL}
-#      LOGGING_LEVEL_ORG_SPRINGFRAMEWORK: ${LOG_LEVEL}
-#      LOGGING_LEVEL_BR_COM_RD: ${LOG_LEVEL}
-#      LOGGING_LEVEL_COM_RD: ${LOG_LEVEL}
-#    ports:
-#      - "8887:8887"
-#    networks:
-#      - app-net
 
 volumes:
   redis:

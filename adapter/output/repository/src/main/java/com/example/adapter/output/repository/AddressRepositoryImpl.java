@@ -4,7 +4,7 @@ package com.example.adapter.output.repository;
 import com.example.adapter.output.aspect.Tenant;
 import com.example.adapter.output.repository.mapper.ProductOutputMapper;
 import com.example.adapter.output.repository.utils.Constants;
-import com.example.domain.Product;
+import com.example.domain.entities.Address;
 import com.example.domain.ports.output.DeleteProductOutputPort;
 import com.example.domain.ports.output.FindProductByFiltersOutputPort;
 import com.example.domain.ports.output.FindProductByIdOutputPort;
@@ -18,18 +18,16 @@ import java.util.Optional;
 
 @Slf4j
 @Component
-@Tenant
 @AllArgsConstructor
-public class ProductRepositoryImpl implements SaveProductOutputPort,
+public class AddressRepositoryImpl implements SaveProductOutputPort,
                                               FindProductByIdOutputPort,
-                                              FindProductByFiltersOutputPort,
-                                              DeleteProductOutputPort {
+                                              FindProductByFiltersOutputPort {
 
     private final ProductOutputMapper mapper;
 
     private final ProductEntityRepository repository;
     @Override
-    public Product save(Product product) {
+    public Address save(Address product) {
 
         log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY,
                 "Início da persistência de um produto ", Constants.LOG_METHOD_SAVE, product);
@@ -45,7 +43,7 @@ public class ProductRepositoryImpl implements SaveProductOutputPort,
     }
 
     @Override
-    public Optional<Product> findById(String productId) {
+    public Optional<Address> findById(String productId) {
         log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY_ID,
                 "Início da busca de um produto por id ", Constants.LOG_METHOD_FIND_BY_ID, productId);
 
@@ -58,7 +56,7 @@ public class ProductRepositoryImpl implements SaveProductOutputPort,
     }
 
     @Override
-    public List<Product> findByFilter(String query) {
+    public List<Address> findByFilter(String query) {
 
         log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY_ID,
                 "Início da busca da lista de produtos por filtros ", Constants.LOG_METHOD_FIND_BY_FILTER, query);

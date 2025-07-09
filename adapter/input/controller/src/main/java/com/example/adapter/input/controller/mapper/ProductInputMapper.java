@@ -2,7 +2,7 @@ package com.example.adapter.input.controller.mapper;
 
 import com.example.adapter.input.controller.dto.ProductRequest;
 import com.example.adapter.input.controller.dto.ProductResponse;
-import com.example.domain.Product;
+import com.example.domain.entities.Address;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -12,10 +12,10 @@ public interface ProductInputMapper {
     @Mapping(source = "tenantId", target = "tenantId")
     @Mapping(source = "description", target = "description")
     @Mapping(source = "value", target = "value")
-    ProductResponse toProductResponse(Product product);
+    ProductResponse toProductResponse(Address product);
 
     @Mapping(source = "description", target = "description")
     @Mapping(source = "value", target = "value")
-    Product toProduct(ProductRequest request);
+    Address toProduct(ProductRequest request);
 }
 

@@ -101,11 +101,13 @@ public class ProductController {
             @ApiResponse(responseCode = "500", description = "Sistema indisponível no momento")})
     public ResponseEntity<ProductResponse> findById(@PathVariable String id) {
 
-        log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY_ID, "Início da busca de um produto por id ", Constants.LOG_METHOD_FIND_BY_ID, id);
+        log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY_ID,
+                "Início da busca de um produto por id ", Constants.LOG_METHOD_FIND_BY_ID, id);
 
         var product = mapper.toProductResponse(findProductByIdInputPort.findById(id));
 
-        log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY, "Fim da busca de um produto por id ", Constants.LOG_METHOD_FIND_BY_ID, product);
+        log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY,
+                "Fim da busca de um produto por id ", Constants.LOG_METHOD_FIND_BY_ID, product);
 
         return ResponseEntity.ok(product);
     }

@@ -38,6 +38,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>domain</artifactId>
@@ -61,7 +62,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>example-spring-app</finalName>
+		<finalName>example-app</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
