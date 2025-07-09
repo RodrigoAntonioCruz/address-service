@@ -24,11 +24,11 @@ public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
     }
 
     @Override
-    public Address findByCep(String cep) {
+    public Address findAddressByCep(String cep) {
         Cep cepVO = new Cep(cep);
 
         return cepVO.generateFallbacks().stream()
-                .map(findAddressByCepOutputPort::findByCep)
+                .map(findAddressByCepOutputPort::findAddressByCep)
                 .flatMap(Optional::stream)
                 .findFirst()
                 .orElseThrow(() ->

@@ -5,5 +5,5 @@ import com.example.domain.entities.Address;
 import java.util.Optional;
 
 public interface FindAddressByCepOutputPort {
-    Optional<Address> findByCep(String cep);
+    Optional<Address> findAddressByCep(String cep);
 }
