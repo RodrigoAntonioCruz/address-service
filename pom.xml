@@ -16,6 +16,7 @@
         <module>core/domain</module>
         <module>core/use-case</module>
         <module>adapter/input/controller</module>
+        <module>adapter/output/client</module>
         <module>adapter/output/repository</module>
         <module>app</module>
     </modules>
