@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.catalina.connector.ClientAbortException;
 import org.slf4j.MDC;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -64,11 +63,6 @@ public class ExceptionHandlerConfiguration {
     @ExceptionHandler({ClientAbortException.class})
     public ResponseEntity<Object> handleClientAbortException(ClientAbortException e, HttpServletRequest request) {
         return getException(HttpStatus.valueOf(499), HttpStatus.CONFLICT.getReasonPhrase(), ExceptionResolver.getRootException(e), request, Constants.LOG_METHOD_CLIENT_ABORT_EXCEPTION);
-    }
-
-    @ExceptionHandler({EmptyResultDataAccessException.class})
-    public ResponseEntity<Object> handleEmptyResultDataAccessException(EmptyResultDataAccessException e, HttpServletRequest request) {
-        return getException(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(), ExceptionResolver.getRootException(e), request, Constants.LOG_METHOD_EMPTY_RESULT_DATA_ACCESS_EXCEPTION);
     }
 
     @ExceptionHandler({NotFoundException.class})

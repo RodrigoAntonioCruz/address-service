@@ -171,4 +171,9 @@ public class Constants {
     public static final String SUFFIX_END_OF_DAY = "T23:59:59Z";
     public static final String ORIGINAL_ROUTING_KEY = "x-original-routing-key";
 
+    public static final String CORS_ALLOWED_ORIGINS_PROPERTY = "cors.allowed-origins";
+    public static final String CORS_DEFAULT_ORIGINS = "";
+    public static final String CORS_URL_PATTERN = "/**";
+    public static final long CORS_MAX_AGE_SECONDS = 3600L;
+
 }
