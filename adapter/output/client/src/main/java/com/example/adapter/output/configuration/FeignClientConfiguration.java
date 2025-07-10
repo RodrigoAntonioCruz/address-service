@@ -10,9 +10,7 @@ public class FeignClientConfiguration {
 
     @Bean
     public RequestInterceptor requestInterceptor() {
-        return template -> {
-            template.header("Accept", "application/json");
-        };
+        return template -> template.header("Accept", "application/json");
     }
 }
 
