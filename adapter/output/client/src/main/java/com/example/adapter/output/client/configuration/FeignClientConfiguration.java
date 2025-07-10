@@ -1,4 +1,4 @@
-package com.example.adapter.output.configuration;
+package com.example.adapter.output.client.configuration;
 
 
 import feign.RequestInterceptor;

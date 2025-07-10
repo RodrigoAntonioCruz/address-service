@@ -16,8 +16,8 @@
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
-	<name>Controller</name>
-	<description>Este módulo é responsável por receber as solicitações REST do mundo exterior</description>
+	<name>Controllers</name>
+	<description>Este módulo é responsável por receber e processar solicitações HTTP REST dos clientes da aplicação.</description>
 
 	<dependencies>
 		<dependency>

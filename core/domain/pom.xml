@@ -16,8 +16,8 @@
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
-	<name>Domain</name>
-	<description>Este módulo contém as classes de domínio do projeto</description>
+	<name>Domains</name>
+	<description>Este módulo contém as entidades, value objects e regras de negócio do domínio do projeto.</description>
 
 	<dependencies>
 		<dependency>

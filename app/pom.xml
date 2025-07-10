@@ -16,8 +16,8 @@
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
-	<name>Spring App Module</name>
-	<description>Módulo central que agrega todos os recursos, dependências e configurações necessárias para a operação baseada no Spring ‘Framework’.</description>
+	<name>App</name>
+	<description>Módulo central responsável por inicializar a aplicação, reunir configurações e gerenciar as dependências no contexto do Spring Framework.</description>
 
 	<dependencies>
 		<dependency>

@@ -16,8 +16,8 @@
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
-	<name>Repository</name>
-	<description>Este módulo responsável por armazenar e fornecer os dados para o mundo exterior</description>
+	<name>Repositories</name>
+	<description>Este módulo é responsável pela persistência e acesso a dados, incluindo bancos de dados e caches.</description>
 
 	<dependencies>
 		<dependency>

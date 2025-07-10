@@ -16,8 +16,8 @@
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
-	<name>Use case</name>
-	<description>Este módulo contém os casos de uso e interações principais da aplicação</description>
+	<name>Usecases</name>
+	<description>Este módulo contém os casos de uso que representam as regras de negócio e orquestram as operações da aplicação.</description>
 
 	<dependencies>
 		<dependency>

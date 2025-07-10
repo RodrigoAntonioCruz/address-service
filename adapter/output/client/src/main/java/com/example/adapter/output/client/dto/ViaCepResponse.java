@@ -1,4 +1,4 @@
-package com.example.adapter.output.dto;
+package com.example.adapter.output.client.dto;
 
 import lombok.Builder;
 

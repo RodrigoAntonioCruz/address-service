@@ -1,8 +1,9 @@
-package com.example.adapter.input.controller.configuration.handler;
+package com.example.adapter.input.controller.configuration.exceptionhandler;
 
 import com.example.adapter.input.controller.exception.BusinessException;
 import com.example.adapter.input.controller.exception.ExceptionResolver;
 import com.example.adapter.input.controller.utils.Constants;
+import com.example.usecase.exception.NotFoundException;
 import com.sun.jdi.request.DuplicateRequestException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;
@@ -70,9 +71,9 @@ public class ExceptionHandlerConfiguration {
         return getException(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(), ExceptionResolver.getRootException(e), request, Constants.LOG_METHOD_EMPTY_RESULT_DATA_ACCESS_EXCEPTION);
     }
 
-    @ExceptionHandler({UserNotFoundException.class})
-    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException e, HttpServletRequest request) {
-        return getException(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(), e.getMessage(), request, Constants.LOG_METHOD_USER_NOT_FOUND_EXCEPTION);
+    @ExceptionHandler({NotFoundException.class})
+    public ResponseEntity<Object> handleUserNotFoundException(NotFoundException e, HttpServletRequest request) {
+        return getException(HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND.getReasonPhrase(), e.getMessage(), request, Constants.LOG_METHOD_NOT_FOUND_EXCEPTION);
     }
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<Object> handleHttpMessageNotReadableException(HttpMessageNotReadableException e, HttpServletRequest request) {
@@ -150,14 +151,16 @@ public class ExceptionHandlerConfiguration {
                 .build();
 
         var responseHeaders = new HttpHeaders();
-        responseHeaders.set(Constants.X_RD_TRACEID, getTraceID());
+        responseHeaders.set(Constants.TRACE_ID_KEY, getTraceID());
 
         if (HttpStatus.INTERNAL_SERVER_ERROR.value() == exception.getHttpStatusCode().value()) {
             log.error(Constants.LOG_KEY_METHOD + Constants.LOG_KEY_EVENT + Constants.LOG_KEY_HTTP_CODE + Constants.LOG_KEY_MESSAGE +
-                    Constants.LOG_KEY_DESCRIPTION, method, Constants.LOG_EXCEPTION, exception.getHttpStatusCode().value(), exception.getError(), exception.getMessage(), exception);
+                    Constants.LOG_KEY_DESCRIPTION, method, Constants.LOG_EXCEPTION, exception.getHttpStatusCode().value(),
+                    exception.getError(), exception.getMessage(), exception);
         } else {
             log.error(Constants.LOG_KEY_METHOD + Constants.LOG_KEY_EVENT + Constants.LOG_KEY_HTTP_CODE + Constants.LOG_KEY_MESSAGE +
-                    Constants.LOG_KEY_DESCRIPTION, method, Constants.LOG_EXCEPTION, exception.getHttpStatusCode().value(), exception.getError(), exception.getMessage());
+                    Constants.LOG_KEY_DESCRIPTION, method, Constants.LOG_EXCEPTION, exception.getHttpStatusCode().value(),
+                    exception.getError(), exception.getMessage());
         }
 
         return ResponseEntity.status(exception.getHttpStatusCode()).headers(responseHeaders).body(exception.getOnlyBody());
