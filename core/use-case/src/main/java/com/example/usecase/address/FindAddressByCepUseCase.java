@@ -32,7 +32,7 @@ public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
                 .flatMap(Optional::stream)
                 .findFirst()
                 .orElseThrow(() ->
-                        new NotFoundException(String.format(Constants.ADDRESS_NOT_FOUND, cep))
+                        new NotFoundException(String.format(Constants.ADDRESS_NOT_FOUND_MESSAGE, cep))
                 );
     }
 }
