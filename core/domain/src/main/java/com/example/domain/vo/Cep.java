@@ -8,16 +8,18 @@ import java.util.stream.Stream;
 
 public record Cep(String value) {
 
-    public Cep {
-        if (Objects.isNull(value) || !value.matches(Constants.CEP_REGEX)) {
-            throw new IllegalArgumentException(Constants.ZIP_CODE_INVALID_MESSAGE);
+    public Cep(String value) {
+        String trimmed = Objects.isNull(value) ? null : value.trim();
+        if (Objects.isNull(trimmed) || !trimmed.matches(Constants.CEP_REGEX)) {
+            throw new IllegalArgumentException(Constants.CEP_INVALID_MESSAGE);
         }
+        this.value = trimmed;
     }
 
     public List<String> generateFallbacks() {
         return Stream.iterate(
                 value,
-                prev -> !prev.equals(Constants.ZIP_CODE_NOT_FOUND_VALUE),
+                prev -> !prev.equals(Constants.CEP_NOT_FOUND_VALUE),
                 this::zeroRightmostDigit
         ).toList();
     }
@@ -31,5 +33,10 @@ public record Cep(String value) {
             }
         }
         return new String(digits);
+    }
+
+    @Override
+    public String toString() {
+        return value;
     }
 }

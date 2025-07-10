@@ -10,7 +10,7 @@ public class Constants {
      */
     public static final String LOG_KEY_METHOD = "method={} ";
     public static final String LOG_KEY_MESSAGE = "msg=\"{}\" ";
-    public static final String LOG_KEY_ZIP_CODE = "zipCode={} ";
+    public static final String LOG_KEY_ZIP_CODE = "cep={} ";
 
     /**
      * LOG_METHOD

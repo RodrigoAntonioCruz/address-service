@@ -1,6 +1,6 @@
 package com.example.domain.entities;
 public record Address(
-        String zipCode,
+        String cep,
         String street,
         String neighborhood,
         String city,
