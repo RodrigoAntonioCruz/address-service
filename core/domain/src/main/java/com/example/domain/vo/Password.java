@@ -4,7 +4,6 @@ import com.example.domain.utils.Constants;
 
 import java.util.Objects;
 public class Password {
-
     private final String value;
 
     public Password(String value) {

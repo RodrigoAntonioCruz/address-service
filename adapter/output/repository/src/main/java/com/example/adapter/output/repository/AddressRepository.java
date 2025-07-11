@@ -3,7 +3,7 @@ package com.example.adapter.output.repository;
 import com.example.adapter.output.client.ViaCepClientImpl;
 import com.example.adapter.output.client.utils.Constants;
 import com.example.domain.entities.Address;
-import com.example.usecase.ports.output.FindAddressByCepOutputPort;
+import com.example.usecase.address.ports.output.FindAddressByCepOutputPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.CachePut;

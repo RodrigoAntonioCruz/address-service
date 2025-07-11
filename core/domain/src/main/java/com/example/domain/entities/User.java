@@ -95,7 +95,7 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    // setters sem validação, pois validação está centralizada no construtor
+    // setters sem validação, pois validação está no construtor
     public void setUsername(String username) {
         this.username = username;
     }

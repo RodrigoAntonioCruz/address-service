@@ -1,11 +1,11 @@
 package com.example.usecase.address;
 
 import com.example.domain.entities.Address;
+import com.example.domain.utils.Constants;
 import com.example.domain.vo.Cep;
+import com.example.usecase.address.ports.input.FindAddressByCepInputPort;
+import com.example.usecase.address.ports.output.FindAddressByCepOutputPort;
 import com.example.usecase.exception.NotFoundException;
-import com.example.usecase.ports.input.FindAddressByCepInputPort;
-import com.example.usecase.ports.output.FindAddressByCepOutputPort;
-import com.example.usecase.utils.Constants;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.inject.Named;

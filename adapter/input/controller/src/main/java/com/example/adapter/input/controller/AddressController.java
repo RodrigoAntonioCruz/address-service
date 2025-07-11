@@ -3,7 +3,7 @@ package com.example.adapter.input.controller;
 import com.example.adapter.input.controller.dto.response.AddressResponse;
 import com.example.adapter.input.controller.mapper.AddressInputMapper;
 import com.example.adapter.input.controller.utils.Constants;
-import com.example.usecase.ports.input.FindAddressByCepInputPort;
+import com.example.usecase.address.ports.input.FindAddressByCepInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

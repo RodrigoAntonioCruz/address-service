@@ -1,4 +1,4 @@
-package com.example.usecase.ports.output;
+package com.example.usecase.address.ports.output;
 
 import com.example.domain.entities.Address;
 

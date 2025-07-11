@@ -6,9 +6,8 @@ import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Email {
-    public static final Pattern PATTERN = Pattern.compile(Constants.EMAIL_REGEX);
-
     private final String value;
+    public static final Pattern PATTERN = Pattern.compile(Constants.EMAIL_REGEX);
 
     public Email(String value) {
         if (Objects.isNull(value) || value.isBlank()) {

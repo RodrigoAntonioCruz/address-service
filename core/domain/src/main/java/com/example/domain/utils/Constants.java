@@ -12,6 +12,7 @@ public class Constants {
     public static final String PASSWORD_NULL_OR_BLANK = "A senha não pode ser nula ou estar em branco";
     public static final String PASSWORD_MIN_LENGTH = "A senha deve ter pelo menos 8 caracteres";
     public static final String PASSWORD_COMPLEXITY = "A senha deve conter pelo menos uma letra, um número e um caractere especial";
+    public static final String ADDRESS_NOT_FOUND_MESSAGE = "O endereço para o cep: %s não foi encontrado";
     public static final String PASSWORD_COMPLEXITY_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$";
     public static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,63}$";
     public static final String CEP_INVALID_MESSAGE = "CEP informado é inválido";
