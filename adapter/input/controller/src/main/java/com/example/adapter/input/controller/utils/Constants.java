@@ -105,7 +105,7 @@ public class Constants {
     public static final String CPF_REQUIRED = "O CPF é obrigatório";
     public static final String CPF_REGEX = "\\d{11}";
     public static final String CPF_INVALID = "O CPF deve conter 11 dígitos numéricos";
-    public static final String CPF_EXAMPLE = "95345678909";
+    public static final String CPF_EXAMPLE = "73786275009";
     public static final String CPF_DESCRIPTION = "CPF do usuário (somente números)";
     public static final String EMAIL_REQUIRED = "O e-mail é obrigatório";
     public static final String EMAIL_INVALID = "O e-mail informado é inválido";

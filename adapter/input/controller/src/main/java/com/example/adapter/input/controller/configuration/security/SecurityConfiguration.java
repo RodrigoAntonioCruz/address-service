@@ -13,35 +13,20 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfiguration {
-
-    public static final String[] PUBLIC_MATCHERS = {
-            "/v1/api/swagger-ui/**",
-            "/v3/api-docs",
-            "/v3/api-docs/**"
-    };
-
-    public static final String[] PUBLIC_MATCHERS_POST = {
-            "/v1/api/auth/**"
-    };
-
-    public static final String[] PROTECTED_MATCHERS_GET = {
-            "/v1/api/addresses/**"
-    };
-
     public static final String ADMIN = "ADMIN";
     public static final String USER = "USER";
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .authorizeHttpRequests(authz -> authz
-                        .requestMatchers(PUBLIC_MATCHERS).permitAll()
-                        .requestMatchers(HttpMethod.POST, PUBLIC_MATCHERS_POST).permitAll()
-                        .requestMatchers(HttpMethod.GET, PROTECTED_MATCHERS_GET).hasAnyAuthority(ADMIN, USER)
-                        .anyRequest().authenticated()
-                )
+                .authorizeHttpRequests(authorizeHttpRequests -> authorizeHttpRequests
+                        .requestMatchers("/public/**", "/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/api/auth", "/v1/api/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/v1/api/addresses", "/v1/api/addresses/**").hasAnyAuthority(ADMIN, USER)
+                        .requestMatchers("/", "/error", "/csrf", "/swagger-ui.html", "/swagger-ui/**", "/v3/api-docs", "/v3/api-docs/**").permitAll()
+                        .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
-                .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sessionManagement -> sessionManagement.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }

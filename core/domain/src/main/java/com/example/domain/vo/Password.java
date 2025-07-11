@@ -10,6 +10,14 @@ public class Password {
         if (Objects.isNull(value) || value.isBlank()) {
             throw new IllegalArgumentException(Constants.PASSWORD_NULL_OR_BLANK);
         }
+
+        value = value.trim();
+
+        if (isEncrypted(value)) {
+            this.value = value;
+            return;
+        }
+
         if (value.length() < Constants.MINIMUM_LENGTH) {
             throw new IllegalArgumentException(Constants.PASSWORD_MIN_LENGTH);
         }
@@ -17,7 +25,15 @@ public class Password {
         if (!value.matches(Constants.PASSWORD_COMPLEXITY_REGEX)) {
             throw new IllegalArgumentException(Constants.PASSWORD_COMPLEXITY);
         }
+
         this.value = value;
+    }
+
+    private boolean isEncrypted(String value) {
+        return value.startsWith("{bcrypt}") ||
+                value.startsWith("$2a$") ||
+                value.startsWith("$2b$") ||
+                value.startsWith("$2y$");
     }
 
     public String getValue() {

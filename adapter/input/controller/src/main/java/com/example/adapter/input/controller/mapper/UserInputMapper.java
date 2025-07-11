@@ -20,28 +20,44 @@ public interface UserInputMapper {
     @Mapping(target = "email", source = "email", qualifiedByName = "toEmail")
     @Mapping(target = "role", source = "role", qualifiedByName = "toRole")
     User toEntity(SignUpRequest request);
+
+    @Mapping(target = "email", source = "email", qualifiedByName = "fromEmail")
+    @Mapping(target = "cpf", source = "cpf", qualifiedByName = "fromCpf")
+    @Mapping(target = "role", source = "role", qualifiedByName = "fromRole")
     AuthResponse toResponse(User user);
 
     @Named("toPassword")
     default Password toPassword(String value) {
-        return new Password(value);
+        return value == null ? null : new Password(value);
     }
 
     @Named("toCpf")
     default Cpf toCpf(String value) {
-        return new Cpf(value);
+        return value == null ? null : new Cpf(value);
     }
 
     @Named("toEmail")
     default Email toEmail(String value) {
-        return new Email(value);
+        return value == null ? null : new Email(value);
     }
 
     @Named("toRole")
     default Role toRole(String value) {
-        if (Objects.isNull(value)) {
-            return null;
-        }
-        return Role.valueOf(value.toUpperCase());
+        return value == null ? null : Role.valueOf(value.toUpperCase());
+    }
+
+    @Named("fromEmail")
+    default String fromEmail(Email email) {
+        return email == null ? null : email.getValue();
+    }
+
+    @Named("fromCpf")
+    default String fromCpf(Cpf cpf) {
+        return cpf == null ? null : cpf.getValue();
+    }
+
+    @Named("fromRole")
+    default String fromRole(Role role) {
+        return role == null ? null : role.name();
     }
 }

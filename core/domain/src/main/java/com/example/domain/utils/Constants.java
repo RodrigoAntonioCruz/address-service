@@ -13,9 +13,10 @@ public class Constants {
     public static final String PASSWORD_MIN_LENGTH = "A senha deve ter pelo menos 8 caracteres";
     public static final String PASSWORD_COMPLEXITY = "A senha deve conter pelo menos uma letra, um número e um caractere especial";
     public static final String ADDRESS_NOT_FOUND_MESSAGE = "O endereço para o cep: %s não foi encontrado";
+    public static final String[] BCRYPT_PREFIXES = {"$2a$", "$2b$", "$2y$"};
     public static final String PASSWORD_COMPLEXITY_REGEX = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]+$";
     public static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,63}$";
-    public static final String CEP_INVALID_MESSAGE = "CEP informado é inválido";
+    public static final String CEP_INVALID_MESSAGE = "O CEP informado é inválido";
     public static final String CPF_NOT_NULL = "O CPF não pode ser nulo";
     public static final String CPF_INVALID = "O CPF digitado é inválido";
     public static final String EMAIL_INVALID = "O e-mail digitado é inválido";
@@ -24,4 +25,6 @@ public class Constants {
     public static final String USERNAME_REQUIRED = "Username não pode ser nulo ou vazio";
     public static final String PASSWORD_NOT_NULL = "Senha não pode ser nula ou vazia";
     public static final String ROLE_NOT_NULL = "O perfil não pode ser nulo ou vazio";
+    public static final String USERNAME_ALREADY_EXISTS = "O username: %s informado já existe";
+    public static final String EMAIL_ALREADY_EXISTS = "O e-mail: %s informado já existe";
 }
