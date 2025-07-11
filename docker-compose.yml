@@ -113,7 +113,7 @@ services:
 #      SPRING_REDIS_PASSWORD: ${REDIS_PASSWORD}
 #
 #      # MongoDB
-#      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_HOST}:${MONGO_INITDB_PORT}/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=spring-app&directConnection=true&ssl=false
+#      SPRING_DATA_MONGODB_URI: mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@${MONGO_INITDB_HOST}:${MONGO_INITDB_PORT}/${MONGO_INITDB_DATABASE}?authSource=admin&readPreference=primary&appname=app&directConnection=true&ssl=false
 #
 
 volumes:
