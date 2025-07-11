@@ -1,5 +1,7 @@
 package com.example.usecase.user.ports.input;
 
+import com.example.domain.entities.User;
+
 public interface SignInInputPort {
-    void signIn(String email, String password);
+    User signIn(String email, String password);
 }

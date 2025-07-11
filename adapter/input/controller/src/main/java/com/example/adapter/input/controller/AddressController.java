@@ -7,6 +7,7 @@ import com.example.usecase.address.ports.input.FindAddressByCepInputPort;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,7 +29,9 @@ public class AddressController {
     private final FindAddressByCepInputPort findAddressByCepInputPort;
 
     @GetMapping("/{cep}")
-    @Operation(summary = Constants.DESCRIPTION_FIND_ADDRESS_BY_CEP)
+    @Operation(summary = Constants.DESCRIPTION_FIND_ADDRESS_BY_CEP, security = {
+            @SecurityRequirement(name = Constants.BASIC_AUTH_SECURITY_SCHEME)
+    })
     @ApiResponses(value = {
             @ApiResponse(responseCode = Constants.STATUS_CODE_200, description = Constants.RESPONSE_200_GET),
             @ApiResponse(responseCode = Constants.STATUS_CODE_400, description = Constants.RESPONSE_400_VALIDATION_ERROR),
