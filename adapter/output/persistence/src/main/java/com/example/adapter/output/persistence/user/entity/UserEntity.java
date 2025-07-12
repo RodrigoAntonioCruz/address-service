@@ -1,4 +1,4 @@
-package com.example.adapter.output.repository.user.entity;
+package com.example.adapter.output.persistence.user.entity;
 
 import lombok.Builder;
 import lombok.Data;

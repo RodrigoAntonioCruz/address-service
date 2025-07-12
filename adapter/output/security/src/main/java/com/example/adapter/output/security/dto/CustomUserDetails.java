@@ -1,4 +1,4 @@
-package com.example.adapter.output.repository.user.dto;
+package com.example.adapter.output.security.dto;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

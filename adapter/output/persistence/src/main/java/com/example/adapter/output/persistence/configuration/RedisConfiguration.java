@@ -1,4 +1,4 @@
-package com.example.adapter.output.repository.configuration;
+package com.example.adapter.output.persistence.configuration;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.EnableCaching;

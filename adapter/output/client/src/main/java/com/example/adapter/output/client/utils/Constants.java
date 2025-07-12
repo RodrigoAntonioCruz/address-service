@@ -25,5 +25,8 @@ public class Constants {
     public static final String LOG_METHOD_ALIAS_ADDRESS = "saveAddressAlias";
     public static final String LOG_METHOD_FALLBACK_FIND_ADDRESS = "fallbackFindAddress";
     public static final String USER_NOT_FOUND = "Usuário %s não encontrado";
+    public static final String BCRYPT_PREFIX = "$2a$";
+    public static final String BCRYPT_PREFIX_B = "$2b$";
+
 
 }

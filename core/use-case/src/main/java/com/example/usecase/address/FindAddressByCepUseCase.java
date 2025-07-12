@@ -6,22 +6,17 @@ import com.example.domain.vo.Cep;
 import com.example.usecase.address.ports.input.FindAddressByCepInputPort;
 import com.example.usecase.address.ports.output.FindAddressByCepOutputPort;
 import com.example.usecase.exception.NotFoundException;
-import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
-import jakarta.inject.Named;
 
 import java.util.Objects;
 import java.util.logging.Logger;
 
-@Named
-@ApplicationScoped
 public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
 
-    private static final Logger log = Logger.getLogger(FindAddressByCepUseCase.class.getName());
+    private static final Logger LOG = Logger.getLogger(FindAddressByCepUseCase.class.getName());
 
     private final FindAddressByCepOutputPort findAddressByCepOutputPort;
 
-    @Inject
+
     public FindAddressByCepUseCase(final FindAddressByCepOutputPort findAddressByCepOutputPort) {
         this.findAddressByCepOutputPort = findAddressByCepOutputPort;
     }
@@ -30,7 +25,7 @@ public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
     public Address findAddressByCep(String cep) {
         Cep cepVO = new Cep(cep);
 
-        log.info(() -> String.format("msg=\"Início da busca de um endereço por CEP\" method=findAddressByCep cep=%s", cep));
+        LOG.info(() -> String.format("msg=\"Início da busca de um endereço por CEP\" method=findAddressByCep cep=%s", cep));
 
         var address = cepVO.generateFallbacks().stream()
                 .map(findAddressByCepOutputPort::findAddressByCep)
@@ -40,7 +35,7 @@ public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
                         new NotFoundException(String.format(Constants.ADDRESS_NOT_FOUND_MESSAGE, cep))
                 );
 
-        log.info(() -> String.format("msg=\"Fim da busca do endereço=%s por CEP\" method=findAddressByCep cep=%s", address, cep));
+        LOG.info(() -> String.format("msg=\"Fim da busca do endereço=%s por CEP\" method=findAddressByCep cep=%s", address, cep));
 
         return handleAddressOrAlias(cep, address);
 

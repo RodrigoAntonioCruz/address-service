@@ -17,7 +17,8 @@
         <module>core/use-case</module>
         <module>adapter/input/controller</module>
         <module>adapter/output/client</module>
-        <module>adapter/output/repository</module>
+        <module>adapter/output/persistence</module>
+        <module>adapter/output/security</module>
         <module>app</module>
     </modules>
 
@@ -49,7 +50,6 @@
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
         <swagger-annotations.version>1.6.9</swagger-annotations.version>
         <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
-        <jakarta.enterprise.version>4.0.1</jakarta.enterprise.version>
         <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
     </properties>
 
@@ -71,15 +71,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <dependencies>
-        <dependency>
-            <groupId>jakarta.enterprise</groupId>
-            <artifactId>jakarta.enterprise.cdi-api</artifactId>
-            <version>${jakarta.enterprise.version}</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
 
     <build>
         <pluginManagement>
@@ -109,7 +100,6 @@
                     <artifactId>jacoco-maven-plugin</artifactId>
                     <version>${jacoco-maven-plugin.version}</version>
                 </plugin>
-                <!-- ADICIONE ESTE BLOCO: -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -188,5 +178,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

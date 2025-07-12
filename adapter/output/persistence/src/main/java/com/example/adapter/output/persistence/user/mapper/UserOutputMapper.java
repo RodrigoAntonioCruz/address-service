@@ -1,7 +1,7 @@
-package com.example.adapter.output.repository.user.mapper;
+package com.example.adapter.output.persistence.user.mapper;
 
-import com.example.adapter.output.repository.user.dto.CustomUserDetails;
-import com.example.adapter.output.repository.user.entity.UserEntity;
+import com.example.adapter.output.client.utils.Constants;
+import com.example.adapter.output.persistence.user.entity.UserEntity;
 import com.example.domain.entities.User;
 import com.example.domain.enums.Role;
 import com.example.domain.vo.Cpf;
@@ -11,14 +11,11 @@ import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.Collection;
-import java.util.List;
 import java.util.Objects;
 
-@Mapper(componentModel = "spring", imports = SimpleGrantedAuthority.class)
+@Mapper(componentModel = "spring")
 public interface UserOutputMapper {
 
     @Mapping(source = "password", target = "password", qualifiedByName = "passwordToString")
@@ -33,24 +30,11 @@ public interface UserOutputMapper {
     @Mapping(source = "role", target = "role", qualifiedByName = "stringToRole")
     User toDomain(UserEntity userEntity);
 
-    @Mapping(target = "password", expression = "java(user.getPassword().getValue())")
-    @Mapping(target = "email", expression = "java(user.getEmail().getValue())")
-    @Mapping(target = "authorities", expression = "java(mapAuthorities(user))")
-    CustomUserDetails toCustomUserDetails(User user);
-
-    default Collection<SimpleGrantedAuthority> mapAuthorities(User user) {
-        if (user == null || user.getRole() == null) {
-            return List.of();
-        }
-        return List.of(new SimpleGrantedAuthority(user.getRole().name()));
-    }
-
-
     @Named("passwordToString")
     default String passwordToString(Password password, @Context PasswordEncoder encoder) {
         if (Objects.isNull(password)) return null;
         String raw = password.getValue();
-        if (raw.startsWith("$2a$") || raw.startsWith("$2b$")) {
+        if (raw.startsWith(Constants.BCRYPT_PREFIX) || raw.startsWith(Constants.BCRYPT_PREFIX_B)) {
             return raw;
         }
         return encoder.encode(raw);

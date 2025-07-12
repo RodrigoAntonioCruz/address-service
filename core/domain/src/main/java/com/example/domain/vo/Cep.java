@@ -9,11 +9,17 @@ import java.util.stream.Stream;
 public record Cep(String value) {
 
     public Cep(String value) {
-        String trimmed = Objects.isNull(value) ? null : value.trim();
-        if (Objects.isNull(trimmed) || !trimmed.matches(Constants.CEP_REGEX)) {
+        if (Objects.isNull(value)) {
             throw new IllegalArgumentException(Constants.CEP_INVALID_MESSAGE);
         }
-        this.value = trimmed;
+
+        String digitsOnly = value.replaceAll(Constants.DIGIT_REGEX, Constants.EMPTY);
+
+        if (!digitsOnly.matches(Constants.CEP_REGEX)) {
+            throw new IllegalArgumentException(Constants.CEP_INVALID_MESSAGE);
+        }
+
+        this.value = digitsOnly;
     }
 
     public List<String> generateFallbacks() {
@@ -33,6 +39,10 @@ public record Cep(String value) {
             }
         }
         return new String(digits);
+    }
+
+    public String getFormatted() {
+        return value.substring(0, 5) + "-" + value.substring(5);
     }
 
     @Override

@@ -11,8 +11,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-import java.util.Objects;
-
 @Mapper(componentModel = "spring")
 public interface UserInputMapper {
     @Mapping(target = "password", source = "password", qualifiedByName = "toPassword")

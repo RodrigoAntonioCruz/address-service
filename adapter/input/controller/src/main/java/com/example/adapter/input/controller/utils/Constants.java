@@ -8,8 +8,6 @@ public class Constants {
     /**
      * LOG_KEY
      */
-    public static final String LOG_KEY_ID = "id={} ";
-    public static final String LOG_KEY_CLASS = "class={} ";
     public static final String LOG_KEY_METHOD = "method={} ";
     public static final String LOG_KEY_MESSAGE = "msg=\"{}\" ";
     public static final String LOG_KEY_ENTITY = "entity=\"{}\" ";
@@ -41,7 +39,6 @@ public class Constants {
     public static final String SHOULD_BE = " should be ";
     public static final String LOG_METHOD_THROWABLE = "Throwable";
     public static final String LOG_METHOD_SIGNUP = "signUp";
-    public static final String LOG_METHOD_SIGNIN = "signIn";
 
     /**
      * LOG_OTHER
@@ -55,7 +52,6 @@ public class Constants {
      */
     public static final String RESPONSE_201_CREATE = "Criação realizada com sucesso, dados retornados no corpo da resposta";
     public static final String RESPONSE_200_GET = "Busca realizada com sucesso, dados retornados no corpo da resposta";
-    public static final String RESPONSE_200_OK = "Requisição realizada com sucesso, dados retornados no corpo da resposta.";
     public static final String RESPONSE_400_VALIDATION_ERROR = "Erro de validação: os dados informados possuem inconsistências";
     public static final String RESPONSE_401_ACCESS_DENIED = "Acesso negado: autenticação necessária";
     public static final String RESPONSE_403_PERMISSION_DENIED = "Permissão negada: você não tem autorização para acessar este recurso";
@@ -63,7 +59,6 @@ public class Constants {
     public static final String RESPONSE_409_CONFLICT = "Conflito: os dados informados já existem no sistema";
     public static final String RESPONSE_500_INTERNAL_ERROR = "Erro interno: o sistema está indisponível no momento";
     public static final String RESPONSE_503_SERVICE_UNAVAILABLE_ERROR = "O serviço está temporariamente indisponível";
-    public static final String DESCRIPTION_SIGNIN = "Autentica o usuário e retorna o token de acesso";
     public static final String DESCRIPTION_SIGNUP = "Cria um novo usuário no sistema";
     public static final String DESCRIPTION_FIND_ADDRESS_BY_CEP = "Busca o endereço correspondente ao CEP informado";
     public static final String STATUS_CODE_200 = "200";

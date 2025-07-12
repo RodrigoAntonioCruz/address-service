@@ -31,8 +31,8 @@ public class OpenApiConfiguration {
                 .version(appVersion))
                 .tags(List.of(
                       new Tag()
-                          .name("Autenticação")
-                          .description("Endpoints responsáveis pelo cadastro de usuários, autenticação e geração de tokens de acesso"),
+                          .name("Cadastro de Usuário")
+                          .description("Endpoint responsável pelo cadastro de usuários"),
                       new Tag()
                           .name("Consulta de Endereços")
                           .description("Endpoints responsáveis por consultar endereços brasileiros a partir de um CEP informado.")

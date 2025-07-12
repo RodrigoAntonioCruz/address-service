@@ -9,14 +9,14 @@
 		<version>1.0.0</version>
 		<relativePath>../../../pom.xml</relativePath>
 	</parent>
-	<artifactId>repository</artifactId>
+	<artifactId>persistence</artifactId>
 
 	<properties>
 		<maven.compiler.source>17</maven.compiler.source>
 		<maven.compiler.target>17</maven.compiler.target>
 	</properties>
 
-	<name>Repositories</name>
+	<name>Persistense</name>
 	<description>Este módulo é responsável pela persistência e acesso a dados, incluindo bancos de dados e caches.</description>
 
 	<dependencies>
@@ -26,8 +26,9 @@
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>com.example</groupId>
+			<artifactId>client</artifactId>
+			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -93,15 +94,5 @@
 			<artifactId>mockito-junit-jupiter</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>client</artifactId>
-            <version>1.0.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-core</artifactId>
-        </dependency>
     </dependencies>
 </project>

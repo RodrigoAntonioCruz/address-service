@@ -22,9 +22,9 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 @AllArgsConstructor
-@Tag(name = "Autenticação")
+@Tag(name = "Cadastro de Usuário")
 @RequestMapping("/auth")
-public class AuthController {
+public class UserSignUpController {
 
 
     private final UserInputMapper mapper;

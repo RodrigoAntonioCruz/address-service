@@ -1,4 +1,4 @@
-package com.example.adapter.output.repository.address;
+package com.example.adapter.output.persistence.address;
 
 import com.example.adapter.output.client.ViaCepClientImpl;
 import com.example.adapter.output.client.utils.Constants;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Slf4j
 @Repository
 @AllArgsConstructor
-public class AddressRepositoryImpl implements FindAddressByCepOutputPort {
+public class AddressPersistenceAdapter implements FindAddressByCepOutputPort {
 
     private final ViaCepClientImpl viaCepClientImpl;
 

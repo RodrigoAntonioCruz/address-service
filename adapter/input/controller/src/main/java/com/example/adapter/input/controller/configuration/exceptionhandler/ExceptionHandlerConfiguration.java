@@ -3,6 +3,7 @@ package com.example.adapter.input.controller.configuration.exceptionhandler;
 import com.example.adapter.input.controller.exception.BusinessException;
 import com.example.adapter.input.controller.exception.ExceptionResolver;
 import com.example.adapter.input.controller.utils.Constants;
+import com.example.usecase.exception.DuplicatedException;
 import com.example.usecase.exception.NotFoundException;
 import com.sun.jdi.request.DuplicateRequestException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -114,6 +115,10 @@ public class ExceptionHandlerConfiguration {
         return getException(HttpStatus.CONFLICT, HttpStatus.CONFLICT.getReasonPhrase(), e.getMessage(), request, Constants.LOG_METHOD_DUPLICATE);
     }
 
+    @ExceptionHandler({DuplicatedException.class})
+    public ResponseEntity<Object> handleDuplicateRequestException(DuplicatedException e, HttpServletRequest request) {
+        return getException(HttpStatus.CONFLICT, HttpStatus.CONFLICT.getReasonPhrase(), e.getMessage(), request, Constants.LOG_METHOD_DUPLICATE);
+    }
     @ExceptionHandler({IllegalArgumentException.class})
     public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e, HttpServletRequest request) {
         return getException(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.getReasonPhrase(), e.getMessage(), request, Constants.LOG_METHOD_ILLEGAL_ARGUMENT);
