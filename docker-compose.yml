@@ -1,6 +1,6 @@
 services:
-  mongo:
-    container_name: mongo
+  mongo-service:
+    container_name: ${MONGO_SERVICE_NAME}
     image: mongo
     restart: always
     environment:
@@ -12,7 +12,8 @@ services:
     networks:
       - app-net
 
-  redis:
+  redis-service:
+    container_name: ${REDIS_SERVICE_NAME}
     image: redis:6.2.5
     command: redis-server --requirepass ${REDIS_PASSWORD}
     volumes:
@@ -23,7 +24,8 @@ services:
     networks:
       - app-net
 
-  redis-commander:
+  redis-ui-service:
+    container_name: ${REDIS_UI_SERVICE_NAME}
     image: rediscommander/redis-commander:latest
     restart: always
     environment:
@@ -38,28 +40,27 @@ services:
     networks:
       - app-net
 
-  loki:
+  loki-service:
+    container_name: ${LOKI_SERVICE_NAME}
     image: grafana/loki:3.5.0
     command: -config.file=/etc/loki/local-config.yaml
-    ports:
-      - "${LOKI_PORT_EXPOSE}:3100"
     networks:
       - app-net
 
-  promtail:
+  promtail-service:
+    container_name: ${PROMTAIL_SERVICE_NAME}
     image: grafana/promtail:2.9.3
     volumes:
       - /var/lib/docker/containers:/var/lib/docker/containers:ro
       - ${PROMTAIL_CONFIG_PATH}:/etc/promtail
     command: -config.file=/etc/promtail/promtail.yml
     depends_on:
-      - loki
-    ports:
-      - "${PROMTAIL_PORT_EXPOSE}:9080"
+      - ${LOKI_SERVICE_NAME}
     networks:
       - app-net
 
-  prometheus:
+  prometheus-service:
+    container_name: ${PROMETHEUS_SERVICE_NAME}
     image: prom/prometheus:v3.3.1
     volumes:
       - ${PROMETHEUS_CONFIG_PATH}:/workspace
@@ -67,39 +68,20 @@ services:
       - --config.file=/workspace/prometheus.yml
       - --enable-feature=exemplar-storage
     depends_on:
-      - loki
-    ports:
-      - "${PROMETHEUS_PORT_EXPOSE}:9090"
+      - ${LOKI_SERVICE_NAME}
     networks:
       - app-net
 
-  tempo:
-    image: grafana/tempo:2.7.2
-    command:
-      - "-config.file=/etc/tempo.yml"
-      - "--target=all"
-      - "--storage.trace.backend=local"
-      - "--storage.trace.local.path=/var/tempo"
-      - "--auth.enabled=false"
-    volumes:
-      - ./etc/tempo.yml:/etc/tempo.yml
-    depends_on:
-      - loki
-    ports:
-      - "${TEMPO_GRPC_PORT_EXPOSE}:4317"
-      - "${TEMPO_HTTP_PORT_EXPOSE}:4318"
-    networks:
-      - app-net
-
-  grafana:
+  grafana-service:
+    container_name: ${GRAFANA_SERVICE_NAME}
     image: grafana/grafana:12.0.1
     volumes:
       - ${GRAFANA_CONFIG_PATH}:/etc/grafana/provisioning/datasources
-      - ./etc/dashboards.yaml:/etc/grafana/provisioning/dashboards/dashboards.yaml
+      - ./etc/grafana/dashboard.yml:/etc/grafana/provisioning/dashboards/dashboard.yml
       - ${DASHBOARDS_PATH}:/etc/grafana/dashboards
     depends_on:
-      - loki
-      - prometheus
+      - ${LOKI_SERVICE_NAME}
+      - ${PROMETHEUS_SERVICE_NAME}
     environment:
       GF_AUTH_ANONYMOUS_ENABLED: false
       GF_SECURITY_ADMIN_USER: ${GF_USERNAME}
@@ -109,36 +91,32 @@ services:
     networks:
       - app-net
 
-  app:
+  address-service:
     build: .
-    container_name: ${SERVICE_NAME}
+    container_name: ${ADDRESS_SERVICE_NAME}
     depends_on:
-      - mongo
-      - redis
-      - redis-commander
+      - ${MONGO_SERVICE_NAME}
+      - ${REDIS_SERVICE_NAME}
+      - ${REDIS_UI_SERVICE_NAME}
     environment:
-      SPRING_APPLICATION_NAME: ${SERVICE_NAME}
+      SPRING_APPLICATION_NAME: ${ADDRESS_SERVICE_NAME}
       SPRING_APP_VERSION: v@project.version@
-      SPRING_PROFILES_ACTIVE: dev
+      SPRING_PROFILES_ACTIVE: prod
       SERVER_PORT: ${APP_PORT_EXPOSE}
       SERVER_SERVLET_CONTEXT_PATH: /v1/api
       SPRING_MVC_LOCALE: pt_BR
-      OTEL_EXPORTER_OTLP_ENDPOINT: ${OTLP_ENDPOINT}
-      OTEL_EXPORTER_OTLP_PROTOCOL: grpc
-      OTEL_SERVICE_NAME: ${SERVICE_NAME}
-      OTEL_METRICS_EXPORTER: none
-      OTEL_LOGS_EXPORTER: none
-      MANAGEMENT_METRICS_TAGS_APPLICATION: ${SERVICE_NAME}
       SPRING_SECURITY_USER_NAME: ${APPLICATION_USERNAME}
       SPRING_SECURITY_USER_PASSWORD: ${APPLICATION_PASSWORD}
       SPRING_SECURITY_USER_ROLES: ${APPLICATION_ROLES}
-      MANAGEMENT_ENDPOINTS_WEB_EXPOSURE_INCLUDE: '*'
-      MANAGEMENT_ENDPOINT_PROMETHEUS_ENABLED: true
-      MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED: true
-      MANAGEMENT_ENDPOINT_PROMETHEUS_REQUIRE_AUTHORIZATION: false
-      MANAGEMENT_ENDPOINTS_WEB_AUTHORIZATION_ENABLED: false
-      MANAGEMENT_ENDPOINT_HEALTH_SHOW_DETAILS: always
-      MANAGEMENT_HEALTH_PROBES_ENABLED: true
+      SPRING_APPLICATION_JSON: >
+        {
+          "management.endpoints.web.exposure.include": "prometheus,health,info,metrics",
+          "management.metrics.export.prometheus.enabled": true,
+          "management.metrics.distribution.percentiles-histogram.http.server.requests": true,
+          "management.metrics.distribution.percentiles.http.server.requests": [0.50, 0.95, 0.99],
+          "management.metrics.tags.application": "${SPRING_APPLICATION_NAME}",
+          "management.metrics.tags.instance": "${HOSTNAME}"
+        }
       SPRING_JACKSON_DATE_FORMAT: dd/MM/yyyy HH:mm:ss
       SPRING_JACKSON_TIME_ZONE: Brazil/East
       SPRING_DATA_REDIS_HOST: ${REDIS_HOST}
@@ -168,7 +146,7 @@ services:
       LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY: DEBUG
       LOGGING_PATTERN_LEVEL: "trace_id=%mdc{trace_id} span_id=%mdc{span_id} trace_flags=%mdc{trace_flags} %p"
     labels:
-      compose_service: ${SERVICE_NAME}
+      compose_service: ${ADDRESS_SERVICE_NAME}
     ports:
       - "${APP_PORT_EXPOSE}:8887"
     networks:

@@ -35,10 +35,10 @@ public class AddressPersistenceAdapter implements FindAddressByCepOutputPort {
     @CachePut(value = "address", key = "#aliasCep")
     public Address saveAddressAlias(String aliasCep, Address address) {
         log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD,
-                "Início da criação de um alias de busca para o cep= ", aliasCep, Constants.LOG_METHOD_ALIAS_ADDRESS);
+                "Início da criação de um alias de busca para o cep= " + aliasCep, Constants.LOG_METHOD_ALIAS_ADDRESS);
 
         log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD ,
-                "Fim da criação de um alias de busca para o cep=", aliasCep, Constants.LOG_METHOD_ALIAS_ADDRESS);
+                "Fim da criação de um alias de busca para o cep=" + aliasCep, Constants.LOG_METHOD_ALIAS_ADDRESS);
 
         return address;
     }
