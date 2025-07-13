@@ -24,7 +24,7 @@ public record Cep(String value) {
 
     public List<String> generateFallbacks() {
         return Stream.iterate(
-                value,
+                zeroRightmostDigit(value),
                 prev -> !prev.equals(Constants.CEP_NOT_FOUND_VALUE),
                 this::zeroRightmostDigit
         ).toList();

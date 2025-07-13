@@ -79,6 +79,8 @@ public class Constants {
     /**
      * OTHERS
      */
+    public static final String ADMIN = "ADMIN";
+    public static final String USER = "USER";
     public static final int USERNAME_MIN = 3;
     public static final int USERNAME_MAX = 50;
     public static final String USERNAME_REQUIRED = "O username é obrigatório";

@@ -50,7 +50,6 @@
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
         <swagger-annotations.version>1.6.9</swagger-annotations.version>
         <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
-        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
     </properties>
 
     <dependencyManagement>

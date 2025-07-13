@@ -16,7 +16,6 @@ public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
 
     private final FindAddressByCepOutputPort findAddressByCepOutputPort;
 
-
     public FindAddressByCepUseCase(final FindAddressByCepOutputPort findAddressByCepOutputPort) {
         this.findAddressByCepOutputPort = findAddressByCepOutputPort;
     }
@@ -25,30 +24,56 @@ public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
     public Address findAddressByCep(String cep) {
         Cep cepVO = new Cep(cep);
 
-        LOG.info(() -> String.format("msg=\"Início da busca de um endereço por CEP\" method=findAddressByCep cep=%s", cep));
+        LOG.info(() -> String.format(
+                "msg=\"Início da busca de um endereço por CEP\" method=findAddressByCep cepOriginal=%s cepNormalizado=%s",
+                cep, cepVO.value()
+        ));
 
-        var address = cepVO.generateFallbacks().stream()
+        // Primeiro tenta o CEP original
+        Address address = findAddressByCepOutputPort.findAddressByCep(cepVO.value());
+        if (isValidAddress(address)) {
+            Address finalAddress = address;
+            LOG.info(() -> String.format(
+                    "msg=\"Endereço encontrado diretamente pelo CEP\" method=findAddressByCep cep=%s address=%s",
+                    cepVO.value(), finalAddress
+            ));
+            return address;
+        }
+
+        // Tenta os fallbacks
+        address = cepVO.generateFallbacks().stream()
+                .filter(fallbackCep -> !fallbackCep.equals(cepVO.value()))
                 .map(findAddressByCepOutputPort::findAddressByCep)
-                .filter(a -> Objects.nonNull(a) && Objects.nonNull(a.cep()) && Objects.nonNull(a.street()))
+                .filter(this::isValidAddress)
                 .findFirst()
                 .orElseThrow(() ->
                         new NotFoundException(String.format(Constants.ADDRESS_NOT_FOUND_MESSAGE, cep))
                 );
 
-        LOG.info(() -> String.format("msg=\"Fim da busca do endereço=%s por CEP\" method=findAddressByCep cep=%s", address, cep));
+        Address finalAddress1 = address;
+        LOG.info(() -> String.format(
+                "msg=\"Endereço encontrado via fallback\" method=findAddressByCep cep=%s address=%s",
+                cep, finalAddress1
+        ));
 
-        return handleAddressOrAlias(cep, address);
-
+        return handleAddressOrAlias(cepVO.value(), cep, address);
     }
 
-    private Address handleAddressOrAlias(String cep, Address address) {
-        if (!cep.equals(address.cep())) {
-            var cachedAddress = findAddressByCepOutputPort.findAddressByCep(cep);
-            if (Objects.isNull(cachedAddress) || Objects.isNull(cachedAddress.cep())) {
-                return findAddressByCepOutputPort.saveAddressAlias(cep, address);
-            }
-            return cachedAddress;
+    private Address handleAddressOrAlias(String normalizedCep, String originalCep, Address address) {
+        if (!normalizedCep.equals(address.cep())) {
+            findAddressByCepOutputPort.saveAddressAlias(originalCep, address);
+
+            LOG.info(() -> String.format(
+                    "msg=\"Alias criado para o CEP original\" method=findAddressByCep cepOriginal=%s cepReferenciado=%s",
+                    originalCep, address.cep()
+            ));
         }
         return address;
+    }
+
+    private boolean isValidAddress(Address address) {
+        return Objects.nonNull(address)
+                && Objects.nonNull(address.cep())
+                && Objects.nonNull(address.street());
     }
 }
