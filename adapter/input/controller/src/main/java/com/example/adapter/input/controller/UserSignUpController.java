@@ -1,7 +1,7 @@
 package com.example.adapter.input.controller;
 
 import com.example.adapter.input.controller.dto.request.SignUpRequest;
-import com.example.adapter.input.controller.dto.response.AuthResponse;
+import com.example.adapter.input.controller.dto.response.SignUpResponse;
 import com.example.adapter.input.controller.mapper.UserInputMapper;
 import com.example.adapter.input.controller.utils.Constants;
 import com.example.usecase.user.ports.input.SignUpInputPort;
@@ -26,12 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 public class UserSignUpController {
 
-
     private final UserInputMapper mapper;
 
-
     private final SignUpInputPort signUpInputPort;
-
 
     @PostMapping("/signup")
     @Operation(summary = Constants.DESCRIPTION_SIGNUP)
@@ -44,7 +41,7 @@ public class UserSignUpController {
             @ApiResponse(responseCode = Constants.STATUS_CODE_500, description = Constants.RESPONSE_500_INTERNAL_ERROR),
             @ApiResponse(responseCode = Constants.STATUS_CODE_503, description = Constants.RESPONSE_503_SERVICE_UNAVAILABLE_ERROR)
     })
-    public ResponseEntity<AuthResponse> signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
+    public ResponseEntity<SignUpResponse> signUp(@Valid @RequestBody SignUpRequest signUpRequest) {
         log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_ENTITY,
                 "Início da criação de um usuário ", Constants.LOG_METHOD_SIGNUP, signUpRequest);
 

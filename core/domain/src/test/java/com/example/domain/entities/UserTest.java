@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-@DisplayName("Testes Unitários da Entidade User")
 class UserTest {
 
     @Test

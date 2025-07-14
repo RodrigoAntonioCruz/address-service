@@ -1,7 +1,7 @@
 package com.example.adapter.input.controller.mapper;
 
 import com.example.adapter.input.controller.dto.request.SignUpRequest;
-import com.example.adapter.input.controller.dto.response.AuthResponse;
+import com.example.adapter.input.controller.dto.response.SignUpResponse;
 import com.example.domain.entities.User;
 import com.example.domain.enums.Role;
 import com.example.domain.vo.Cpf;
@@ -22,7 +22,7 @@ public interface UserInputMapper {
     @Mapping(target = "email", source = "email", qualifiedByName = "fromEmail")
     @Mapping(target = "cpf", source = "cpf", qualifiedByName = "fromCpf")
     @Mapping(target = "role", source = "role", qualifiedByName = "fromRole")
-    AuthResponse toResponse(User user);
+    SignUpResponse toResponse(User user);
 
     @Named("toPassword")
     default Password toPassword(String value) {

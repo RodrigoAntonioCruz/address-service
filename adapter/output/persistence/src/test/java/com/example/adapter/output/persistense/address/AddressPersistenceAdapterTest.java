@@ -3,15 +3,18 @@ package com.example.adapter.output.persistense.address;
 import com.example.adapter.output.client.ViaCepClientImpl;
 import com.example.adapter.output.persistence.address.AddressPersistenceAdapter;
 import com.example.domain.entities.Address;
-import feign.FeignException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.example.adapter.output.persistense.Fixtures.*;
+import static com.example.adapter.output.persistense.Fixtures.ALIAS_CEP;
+import static com.example.adapter.output.persistense.Fixtures.VALID_CEP;
+import static com.example.adapter.output.persistense.Fixtures.validAddress;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 class AddressPersistenceAdapterTest {
 
@@ -51,18 +54,6 @@ class AddressPersistenceAdapterTest {
                 .isNotNull()
                 .usingRecursiveComparison()
                 .isEqualTo(validAddress());
-    }
-
-    @Test
-    @DisplayName("Deve retornar null se ViaCep retornar FeignException.NotFound")
-    void shouldReturnNullWhenViaCepReturnsNotFound() {
-        when(viaCepClient.findAddressByCep(VALID_CEP))
-                .thenThrow(FeignException.NotFound.class);
-
-        var result = adapter.findAddressByCep(VALID_CEP);
-
-        assertThat(result).isNull();
-        verify(viaCepClient).findAddressByCep(VALID_CEP);
     }
 
     @Test

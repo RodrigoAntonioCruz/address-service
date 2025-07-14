@@ -1,12 +1,12 @@
 package com.example.domain.entities;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class AddressTest {
-
+ class AddressTest {
     @Test
-    public void shouldCreateAddressWithAllFields() {
+    void shouldCreateAddressWithAllFields() {
         Address address = Fixtures.validAddress();
 
         assertThat(address.cep()).isEqualTo(Fixtures.VALID_CEP);

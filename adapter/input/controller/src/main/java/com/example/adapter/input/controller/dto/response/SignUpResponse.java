@@ -1,6 +1,6 @@
 package com.example.adapter.input.controller.dto.response;
 
-public record AuthResponse(
+public record SignUpResponse(
         String id,
         String username,
         String name,

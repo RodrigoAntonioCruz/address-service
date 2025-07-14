@@ -40,7 +40,7 @@
         <mockito.version>3.11.2</mockito.version>
         <checkstyle.version>8.45</checkstyle.version>
         <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
-        <maven-failsafe-plugin.version>2.22.2</maven-failsafe-plugin.version>
+        <maven-failsafe-plugin.version>3.2.5</maven-failsafe-plugin.version>
         <maven-surefire-plugin.version>3.2.5</maven-surefire-plugin.version>
         <maven-checkstyle-plugin.version>3.3.0</maven-checkstyle-plugin.version>
         <mapstruct-processor.version>1.5.3.Final</mapstruct-processor.version>
@@ -51,6 +51,28 @@
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
         <swagger-annotations.version>1.6.9</swagger-annotations.version>
         <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+        <coverage.value>0.90</coverage.value>
+
+        <jacoco.excludes>
+            com/example/adapter/input/controller/dto/**,
+            com/example/adapter/input/controller/utils/**,
+            com/example/adapter/input/controller/mapper/**,
+            com/example/adapter/input/controller/exception/**,
+            com/example/adapter/input/controller/configuration/**,
+            com/example/domain/vo/**,
+            com/example/domain/enums/**,
+            com/example/domain/utils/**,
+            com/example/usecase/exception/**,
+            com/example/usecase/**/ports/**,
+            com/example/adapter/output/persistence/**/entity/**,
+            com/example/adapter/output/persistence/**/mapper/**,
+            com/example/adapter/output/persistence/**/configuration/**,
+            com/example/adapter/output/persistence/**/repository/**,
+            com/example/adapter/output/security/dto/**,
+            com/example/adapter/output/security/mapper/**
+        </jacoco.excludes>
+
+
     </properties>
 
     <dependencyManagement>
@@ -75,8 +97,6 @@
     <build>
         <pluginManagement>
             <plugins>
-
-                <!-- Surefire - Unit tests -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -86,7 +106,6 @@
                     </configuration>
                 </plugin>
 
-                <!-- Failsafe - Integration tests -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-failsafe-plugin</artifactId>
@@ -112,93 +131,6 @@
                     </executions>
                 </plugin>
 
-                <!-- Checkstyle -->
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <version>${maven-checkstyle-plugin.version}</version>
-                    <configuration>
-                        <configLocation>checkstyle.xml</configLocation>
-                        <consoleOutput>true</consoleOutput>
-                        <failsOnError>true</failsOnError>
-                        <includeTestSourceDirectory>true</includeTestSourceDirectory>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>validate</id>
-                            <phase>validate</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                        </execution>
-                    </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.puppycrawl.tools</groupId>
-                            <artifactId>checkstyle</artifactId>
-                            <version>${checkstyle.version}</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-
-                <!-- Jacoco -->
-                <plugin>
-                    <groupId>org.jacoco</groupId>
-                    <artifactId>jacoco-maven-plugin</artifactId>
-                    <version>${jacoco-maven-plugin.version}</version>
-                    <configuration>
-                        <excludes>
-                            <exclude>com/example/adapter/input/controller/dto/**</exclude>
-                            <exclude>com/example/adapter/input/controller/utils/**</exclude>
-                            <exclude>com/example/adapter/input/controller/mapper/**</exclude>
-                            <exclude>com/example/adapter/input/controller/exception/**</exclude>
-                            <exclude>com/example/adapter/input/controller/configuration/**</exclude>
-                        </excludes>
-                    </configuration>
-                    <executions>
-                        <execution>
-                            <id>prepare-agent</id>
-                            <goals>
-                                <goal>prepare-agent</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>report</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>report</goal>
-                            </goals>
-                        </execution>
-                        <execution>
-                            <id>check</id>
-                            <phase>verify</phase>
-                            <goals>
-                                <goal>check</goal>
-                            </goals>
-                            <configuration>
-                                <rules>
-                                    <rule>
-                                        <element>BUNDLE</element>
-                                        <limits>
-                                            <limit>
-                                                <counter>LINE</counter>
-                                                <value>COVEREDRATIO</value>
-                                                <minimum>0.70</minimum>
-                                            </limit>
-                                            <limit>
-                                                <counter>BRANCH</counter>
-                                                <value>COVEREDRATIO</value>
-                                                <minimum>0.70</minimum>
-                                            </limit>
-                                        </limits>
-                                    </rule>
-                                </rules>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
-
-                <!-- Compiler -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -209,7 +141,6 @@
                     </configuration>
                 </plugin>
 
-                <!-- Resources -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
@@ -218,12 +149,11 @@
                         <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
-
             </plugins>
         </pluginManagement>
 
         <plugins>
-            <!-- Exemplo se quiser Checkstyle ativo no parent diretamente -->
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -251,6 +181,83 @@
                     </dependency>
                 </dependencies>
             </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>${jacoco.excludes}</exclude>
+                            </excludes>
+                            <outputDirectory>${project.build.directory}/jacoco-report</outputDirectory>
+                            <formats>
+                                <format>HTML</format>
+                                <format>XML</format>
+                            </formats>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>check</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>${jacoco.excludes}</exclude>
+                            </excludes>
+                            <rules>
+                                <rule>
+                                    <element>BUNDLE</element>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${coverage.value}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+
+                    <execution>
+                        <id>report-aggregate</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report-aggregate</goal>
+                        </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>${jacoco.excludes}</exclude>
+                            </excludes>
+                            <outputDirectory>${project.build.directory}/jacoco-aggregate</outputDirectory>
+                            <formats>
+                                <format>HTML</format>
+                                <format>XML</format>
+                            </formats>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 

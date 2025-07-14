@@ -1,6 +1,5 @@
 package com.example.domain.entities;
 
-import com.example.domain.entities.Address;
 import com.example.domain.enums.Role;
 import com.example.domain.vo.Cpf;
 import com.example.domain.vo.Email;
