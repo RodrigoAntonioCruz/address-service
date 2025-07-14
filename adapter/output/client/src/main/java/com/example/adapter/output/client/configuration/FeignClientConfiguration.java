@@ -12,5 +12,5 @@ public class FeignClientConfiguration {
     public RequestInterceptor requestInterceptor() {
         return template -> template.header("Accept", "application/json");
     }
-}
 
+}

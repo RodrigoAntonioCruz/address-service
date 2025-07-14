@@ -14,7 +14,7 @@ public class Cpf {
 
         String normalized = value.replaceAll("\\D", "");
         if (normalized.length() != 11 || !isValid(normalized)) {
-            throw new IllegalArgumentException(Constants.CPF_INVALID);
+            throw new IllegalArgumentException(Constants.CEP_INVALID_MESSAGE);
         }
         this.value = normalized;
     }

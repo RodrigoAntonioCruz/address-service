@@ -26,12 +26,11 @@ public class ViaCepClientImpl {
                 String.format("Início da busca de um endereço no serviço VIA CEP para o CEP %s ", cep), Constants.LOG_METHOD_FIND_ADDRESS, cep);
 
         var address = mapper.toResponse(
-             viaCepClient.findAddressByCep(cep)
+                viaCepClient.findAddressByCep(cep)
         );
 
         log.info(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_CEP,
                 String.format("Fim da busca de um endereço no serviço VIA CEP para o CEP %s ", cep), Constants.LOG_METHOD_FIND_ADDRESS, cep);
-
 
         return address;
     }
@@ -39,8 +38,6 @@ public class ViaCepClientImpl {
     public Address fallbackFindAddress(String cep, Throwable throwable) {
         log.error(Constants.LOG_KEY_MESSAGE + Constants.LOG_KEY_METHOD + Constants.LOG_KEY_CEP + Constants.LOG_KEY_THROWABLE,
                 String.format("Fallback executado para o CEP %s ", cep), Constants.LOG_METHOD_FALLBACK_FIND_ADDRESS, cep, throwable);
-
-        throw new ServiceUnavailableException(String.format("O serviço VIA CEP está temporariamente indisponível. " +
-                "Não foi possível buscar o endereço para o CEP %s. Tente novamente mais tarde.", cep));
+        throw new ServiceUnavailableException(String.format(Constants.FALLBACK_MESSAGE, cep));
     }
 }

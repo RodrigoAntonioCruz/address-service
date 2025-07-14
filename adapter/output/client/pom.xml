@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<packaging>jar</packaging>
@@ -17,13 +18,19 @@
 	</properties>
 
 	<name>Clients</name>
-	<description>Este módulo implementa integrações com sistemas externos, consumindo dados através de clientes HTTP, como Feign, para atender aos ports de saída definidos na arquitetura.</description>
+	<description>
+		Este módulo implementa integrações com sistemas externos, consumindo dados através de clientes HTTP, como Feign, para atender aos ports de saída definidos na arquitetura.
+	</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>com.example</groupId>
 			<artifactId>domain</artifactId>
 			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -83,6 +90,17 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-junit-jupiter</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.wiremock</groupId>
+			<artifactId>wiremock-standalone</artifactId>
+			<version>3.3.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
