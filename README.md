@@ -2,6 +2,8 @@
 📍 Address Service
 </h1>
 
+---
+
 [![CI/CD Status](https://github.com/RodrigoAntonioCruz/address-service/actions/workflows/build.yml/badge.svg)](https://github.com/RodrigoAntonioCruz/address-service/actions/workflows/build.yml)  [![codecov](https://codecov.io/gh/RodrigoAntonioCruz/address-service/graph/badge.svg?token=U0hX0t8mpH)](https://codecov.io/gh/RodrigoAntonioCruz/address-service)
 
 **Address Service** é um microserviço Java Spring Boot responsável por consultar, armazenar e disponibilizar informações de endereços através do CEP.
@@ -51,6 +53,7 @@ Mais detalhes das decisões técnicas podem ser encontrados na [ADR-001 - Arquit
 Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 - [Docker](https://docs.docker.com/get-started/)
+
 - [Docker Compose](https://docs.docker.com/compose/)
 
 ---
@@ -67,13 +70,15 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 3. Após a execução do comando acima, você verá uma tela semelhante à seguinte, com os containers criados e em execução:
 
-   ![Application Build Terminal](docs/img/app-build-terminal.png)
+![Application Build Terminal](docs/img/app-build-terminal.png)
 
 4. Após os containers estarem ativos, acesse a documentação <a href="http://localhost:8887/v1/api/swagger-ui/index.html" target="_blank" title="Clique e navegue!">Swagger</a> no navegador para testar os endpoints disponíveis:
 
-   <a href="http://localhost:8887/v1/api/swagger-ui/index.html" target="_blank" title="Swagger">
-      ![Application Swagger](docs/img/app-swagger.png)
-   </a>
+<a href="http://localhost:8887/v1/api/swagger-ui/index.html" target="_blank" title="Swagger">
+
+![Application Swagger](docs/img/app-swagger.png)
+
+</a>
 
 5. Após acessar o endpoint de cadastro no <a href="http://localhost:8887/v1/api/swagger-ui/index.html#/Cadastro%20de%20Usu%C3%A1rio/signUp" target="_blank" title="Clique e navegue!">Swagger</a> e criar um novo usuário, autentique-se e faça buscas de CEPs variados. Você poderá acompanhar as métricas no <a href="http://localhost:3000" target="_blank" title="Clique para acessar o Grafana!">Grafana</a>.
 
@@ -109,7 +114,8 @@ Caso queira acompanhar os dados armazenados no Redis, basta acessar a interface 
 
 <a href="http://localhost:8081/" target="_blank" title="Clique para acessar o Redis Commander!"> 
 
-   ![Redis Commander](docs/img/redis.png)
+![Redis Commander](docs/img/redis.png)
+
 </a>
 
 [Dados de acesso ao Redis Commander aqui!](docs/adr/data-access-redis.md)
