@@ -1,8 +1,12 @@
-<h1 style="text-align: center;">📍 Address Service</h1>
+<br><h2 align="center">
+📍 Address Service
+</h2><br>
+
+[![Build & test](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml/badge.svg)](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml) [![codecov](https://codecov.io/gh/RodrigoAntonioCruz/crud-clean-architecture/graph/badge.svg?token=oXUNgmqgIm)](https://codecov.io/gh/RodrigoAntonioCruz/crud-clean-architecture)
 
 **Address Service** é um microserviço Java Spring Boot responsável por consultar, armazenar e disponibilizar informações de endereços através do CEP.
 
-## 🏛️ Arquitetura
+### 🏛️ Arquitetura
 
 A arquitetura do serviço é baseada em uma abordagem de microsserviços, com foco em desempenho, cache e observabilidade. Além disso, o projeto foi desenvolvido seguindo os princípios da **Clean Architecture**, garantindo separação clara de responsabilidades e facilitando a manutenção, evolução e testabilidade do código.
 
@@ -14,7 +18,7 @@ Veja o diagrama abaixo para visualizar a organização da solução:
 
 Mais detalhes das decisões técnicas podem ser encontradas na [ADR-001 - Arquitetura do Address Service](docs/adr/ADR-001-architecture-address-service.md).
 
-## 🛠️ Stacks
+### 🛠️ Stacks
 
 - **Java 17**
 - **Spring Boot 3**
@@ -34,16 +38,16 @@ Mais detalhes das decisões técnicas podem ser encontradas na [ADR-001 - Arquit
   - JUnit
   - Mockito
 
-## 🚀 Como Iniciar
+### 🚀 Como Iniciar
 
-### 📋 Requisitos
+#### 📋 Requisitos
 
 Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 - [Docker](https://docs.docker.com/get-started/)
 - [Docker Compose](https://docs.docker.com/compose/)
 
-### ▶️ Executando o Projeto
+#### ▶️ Executando o Projeto
 
 1. Clone ou baixe o projeto do repositório para o seu computador.
 
