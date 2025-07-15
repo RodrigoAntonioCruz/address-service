@@ -1,5 +1,5 @@
 <h1 align="center">
-📍Address Service<br><br>
+📍Address Service<br>
 </h1>
 
 [![CI/CD Status](https://github.com/RodrigoAntonioCruz/address-service/actions/workflows/build.yml/badge.svg)](https://github.com/RodrigoAntonioCruz/address-service/actions/workflows/build.yml)  [![codecov](https://codecov.io/gh/RodrigoAntonioCruz/address-service/graph/badge.svg?token=U0hX0t8mpH)](https://codecov.io/gh/RodrigoAntonioCruz/address-service)
