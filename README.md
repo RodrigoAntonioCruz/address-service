@@ -55,7 +55,7 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 2. Navegue até a raiz do diretório do projeto e execute o seguinte comando no terminal:
 
     ```bash
-    docker-compose up -d
+    docker compose up -d
     ```
 
 3. Após a execução do comando acima, você verá uma tela semelhante à seguinte, com os containers criados e em execução:
