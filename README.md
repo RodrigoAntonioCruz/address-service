@@ -1,5 +1,5 @@
 <p align="center">
-📍<b>Address Service</b>
+ <b>Address Service</b>
 </p>
 
 ---
