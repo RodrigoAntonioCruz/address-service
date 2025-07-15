@@ -44,21 +44,22 @@ jobs:
           rm -rf deploy-package
           mkdir deploy-package
 
-          cp -R \
-            adapter \
-            app \
-            core \
-            docs \
-            etc \
-            docker-compose.yml \
-            Dockerfile \
-            mvnw \
-            mvnw.cmd \
-            pom.xml \
-            README.md \
-            .env \
-            checkstyle.xml \
-            deploy-package/
+          set -e
+
+          cp -R adapter deploy-package/
+          cp -R app deploy-package/
+          cp -R core deploy-package/
+          [ -d docs ] && cp -R docs deploy-package/ || echo "docs not present, skipping"
+          cp -R etc deploy-package/
+
+          cp docker-compose.yml deploy-package/
+          cp Dockerfile deploy-package/
+          cp mvnw deploy-package/
+          cp mvnw.cmd deploy-package/
+          cp pom.xml deploy-package/
+          cp README.md deploy-package/
+          cp .env deploy-package/
+          cp checkstyle.xml deploy-package/
 
           tar -czf address-service.tar.gz -C deploy-package .
 
@@ -82,6 +83,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
+            set -xe
+
             cd ${{ secrets.VPS_DEPLOY_DIR }}
 
             echo "Parando containers antigos..."
@@ -93,8 +96,17 @@ jobs:
             echo "Extraindo arquivos..."
             tar -xzf address-service.tar.gz
 
+            echo "Conteúdo após extração:"
+            ls -lah
+
+            echo "Build sem cache..."
+            docker compose build --no-cache
+
             echo "Subindo containers..."
-            docker compose up --build -d
+            docker compose up -d
+
+            echo "Status dos containers:"
+            docker compose ps
 
             echo "Removendo arquivo .tar.gz..."
             rm -f address-service.tar.gz
