@@ -1,6 +1,6 @@
-<p align="center">
- <b>Address Service</b>
-</p>
+<h1 align="center">
+📍Address Service
+</h1>
 
 ---
 
@@ -70,7 +70,7 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 3. Após a execução do comando acima, você verá uma tela semelhante à seguinte, com os containers criados e em execução:
 
-![Application Build Terminal](docs/img/app-build-terminal.png)
+   ![Application Build Terminal](docs/img/app-build-terminal.png)
 
 4. Após os containers estarem ativos, acesse a documentação <a href="http://localhost:8887/v1/api/swagger-ui/index.html" target="_blank" title="Clique e navegue!">Swagger</a> no navegador para testar os endpoints disponíveis:
 
