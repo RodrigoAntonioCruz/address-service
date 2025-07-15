@@ -44,33 +44,23 @@ jobs:
           rm -rf deploy-package
           mkdir deploy-package
 
-          set -e
+          cp -R \
+            adapter \
+            app \
+            core \
+            docs \
+            etc \
+            docker-compose.yml \
+            Dockerfile \
+            mvnw \
+            mvnw.cmd \
+            pom.xml \
+            README.md \
+            .env \
+            checkstyle.xml \
+            deploy-package/
 
-          cp -R adapter deploy-package/
-          cp -R app deploy-package/
-          cp -R core deploy-package/
-          [ -d docs ] && cp -R docs deploy-package/ || echo "docs not present, skipping"
-          cp -R etc deploy-package/
-          cp docker-compose.yml deploy-package/
-          cp Dockerfile deploy-package/
-          cp mvnw deploy-package/
-          cp mvnw.cmd deploy-package/
-          cp pom.xml deploy-package/
-          cp README.md deploy-package/
-          cp .env deploy-package/
-          cp checkstyle.xml deploy-package/
-
-          cd deploy-package
-          tar -czf ../address-service.tar.gz .
-
-      - name: Check tar file exists
-        run: |
-          if [ ! -f address-service.tar.gz ]; then
-            echo "address-service.tar.gz NOT FOUND"
-            exit 1
-          fi
-          echo "✅ TAR file generated:"
-          ls -lh address-service.tar.gz
+          tar -czf address-service.tar.gz -C deploy-package .
 
       - name: Copy archive to VPS
         uses: appleboy/scp-action@master
@@ -92,24 +82,34 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_PASSPHRASE }}
           script: |
-            set -xe
+            set -e
 
             cd ${{ secrets.VPS_DEPLOY_DIR }}
 
             echo "Arquivos disponíveis antes de extrair:"
-            ls -lah
+            ls -lah || true
 
-            echo "Parando containers antigos..."
+            echo "Parando containers antigos (se existirem)..."
             docker compose down || true
 
-            echo "Limpando arquivos antigos..."
-            rm -rf *
+            echo "Removendo arquivos antigos, exceto o tar.gz..."
+            # Remove tudo, menos o arquivo .tar.gz
+            find . -mindepth 1 -maxdepth 1 ! -name 'address-service.tar.gz' -exec rm -rf {} + || true
 
-            echo "Extraindo arquivos..."
-            tar -xzf address-service.tar.gz
+            echo "Arquivos após limpeza:"
+            ls -lah || true
 
-            echo "Conteúdo após extração:"
-            ls -lah
+            echo "Extraindo arquivo tar.gz..."
+            if [ -f address-service.tar.gz ]; then
+              tar -xzf address-service.tar.gz
+              echo "Extração concluída."
+            else
+              echo "Arquivo address-service.tar.gz não encontrado!"
+              exit 1
+            fi
+
+            echo "Arquivos após extração:"
+            ls -lah || true
 
             echo "Build sem cache..."
             docker compose build --no-cache
@@ -120,8 +120,8 @@ jobs:
             echo "Status dos containers:"
             docker compose ps
 
-            echo "Removendo arquivo .tar.gz..."
-            rm -f address-service.tar.gz
+            echo "Removendo arquivo tar.gz..."
+            rm -f address-service.tar.gz || true
 
       - name: Cleanup local archive
         run: rm -f address-service.tar.gz
