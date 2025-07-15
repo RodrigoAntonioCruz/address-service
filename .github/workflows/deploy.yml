@@ -41,8 +41,7 @@ jobs:
 
       - name: Create tar.gz archive
         run: |
-          tar --ignore-failed-read \
-              --exclude='.git' \
+          tar --exclude='.git' \
               --exclude='.github' \
               -czf address-service.tar.gz .
 
@@ -71,17 +70,31 @@ jobs:
             echo "Parando containers antigos..."
             docker compose down || true
 
-            echo "Limpando arquivos antigos..."
-            rm -rf *
+            echo "Criando pasta temporária..."
+            mkdir -p tmp
+
+            echo "Movendo arquivo tar.gz para tmp..."
+            mv address-service.tar.gz tmp/
+
+            cd tmp
 
             echo "Extraindo arquivos..."
             tar -xzf address-service.tar.gz
 
-            echo "Subindo containers..."
-            docker compose up --build -d
-
             echo "Removendo arquivo .tar.gz..."
             rm -f address-service.tar.gz
+
+            cd ..
+
+            echo "Removendo arquivos antigos..."
+            rm -rf adapter app core docs etc docker-compose.yml Dockerfile mvnw mvnw.cmd pom.xml README.md .env .gitignore .gitattributes checkstyle.xml || true
+
+            echo "Movendo novos arquivos para raiz..."
+            mv tmp/address-service/* . || true
+            rm -rf tmp
+
+            echo "Subindo containers..."
+            docker compose up --build -d
 
       - name: Cleanup local archive
         run: rm -f address-service.tar.gz
