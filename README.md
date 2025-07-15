@@ -2,7 +2,8 @@
 📍 Address Service
 </h1>
 
-[![Build & test](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml/badge.svg)](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml) [![codecov](https://codecov.io/gh/RodrigoAntonioCruz/crud-clean-architecture/graph/badge.svg?token=oXUNgmqgIm)](https://codecov.io/gh/RodrigoAntonioCruz/crud-clean-architecture)
+[![CI/CD Status](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml/badge.svg)](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml)
+[![codecov](https://codecov.io/gh/RodrigoAntonioCruz/address-service/graph/badge.svg?token=U0hX0t8mpH)](https://codecov.io/gh/RodrigoAntonioCruz/address-service)
 
 **Address Service** é um microserviço Java Spring Boot responsável por consultar, armazenar e disponibilizar informações de endereços através do CEP.
 
