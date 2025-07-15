@@ -1,6 +1,6 @@
-<br><h3 align="center">
+<br><h2 align="center">
 📍 Address Service
-</h3><br>
+</h2><br>
 
 [![Build & test](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml/badge.svg)](https://github.com/RodrigoAntonioCruz/crud-clean-architecture/actions/workflows/build.yml) [![codecov](https://codecov.io/gh/RodrigoAntonioCruz/crud-clean-architecture/graph/badge.svg?token=oXUNgmqgIm)](https://codecov.io/gh/RodrigoAntonioCruz/crud-clean-architecture)
 
