@@ -1,0 +1,28 @@
+# Arquivos de texto genéricos (Java, properties, etc.)
+*.java text diff=java
+*.xml text
+*.properties text
+*.md text
+*.yml text
+*.yaml text
+*.json text
+*.txt text
+
+# Shell scripts (Unix)
+*.sh text eol=lf
+
+# Batch/Windows scripts
+*.bat text eol=crlf
+*.cmd text eol=crlf
+
+# Maven Wrapper
+/mvnw text eol=lf
+/mvnw.cmd text eol=crlf
+
+# Excluir binários de conversão de EOL
+*.jar binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary

@@ -1,0 +1,83 @@
+name: CI/CD - Address Service
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build_and_test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        run: mvn clean verify
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          files: ./target/jacoco-aggregate/jacoco.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          flags: unittests
+          name: address-service-coverage
+          fail_ci_if_error: true
+
+  deploy:
+    needs: build_and_test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Create tar.gz archive
+        run: |
+          tar --exclude='.git' \
+              --exclude='.github' \
+              -czf address-service.tar.gz .
+
+      - name: Copy archive to VPS
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          port: ${{ secrets.VPS_PORT }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          source: "address-service.tar.gz"
+          target: ${{ secrets.VPS_DEPLOY_DIR }}
+
+      - name: Deploy on VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          port: ${{ secrets.VPS_PORT }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_PASSPHRASE }}
+          script: |
+            cd ${{ secrets.VPS_DEPLOY_DIR }}
+
+            echo "Extraindo arquivos..."
+            tar -xzf address-service.tar.gz
+
+            echo "Parando containers antigos..."
+            docker-compose down || true
+
+            echo "Subindo containers..."
+            docker-compose up --build -d
+
+            echo "Removendo arquivo .tar.gz..."
+            rm -f address-service.tar.gz
+
+      - name: Cleanup local archive
+        run: rm -f address-service.tar.gz
