@@ -68,11 +68,14 @@ jobs:
           script: |
             cd ${{ secrets.VPS_DEPLOY_DIR }}
 
-            echo "Extraindo arquivos..."
-            tar -xzf address-service.tar.gz
-
             echo "Parando containers antigos..."
             docker compose down || true
+
+            echo "Limpando arquivos antigos..."
+            rm -rf *
+
+            echo "Extraindo arquivos..."
+            tar -xzf address-service.tar.gz
 
             echo "Subindo containers..."
             docker compose up --build -d
