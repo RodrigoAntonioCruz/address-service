@@ -6,7 +6,6 @@
 
 **Address Service** é um microserviço Java Spring Boot responsável por consultar, armazenar e disponibilizar informações de endereços através do CEP.
 
----
 
 ## 🏛️ Arquitetura
 
