@@ -47,12 +47,16 @@ public class CorsFilterConfiguration {
 
         if (originsProperty.isBlank()) {
             throw new IllegalStateException(
-                    String.format("CORS está mal configurado! Defina a propriedade %s no application.properties", Constants.CORS_ALLOWED_ORIGINS_PROPERTY));
+                    String.format(
+                            "CORS está mal configurado! Defina a propriedade %s no application.properties",
+                            Constants.CORS_ALLOWED_ORIGINS_PROPERTY
+                    )
+            );
         }
 
         List<String> allowedOrigins = List.of(originsProperty.split(","));
 
-        configuration.setAllowedOrigins(allowedOrigins);
+        configuration.setAllowedOriginPatterns(allowedOrigins);
         configuration.setAllowedMethods(List.of(ALLOWED_METHODS));
         configuration.setAllowedHeaders(List.of(ALLOWED_HEADERS));
         configuration.setExposedHeaders(List.of(ALLOWED_HEADERS));
@@ -61,6 +65,9 @@ public class CorsFilterConfiguration {
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration(Constants.CORS_URL_PATTERN, configuration);
+
+        log.info("CORS configurado para origens: {}", allowedOrigins);
+
         return new CorsFilter(source);
     }
 }
