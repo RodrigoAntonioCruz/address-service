@@ -51,7 +51,6 @@ jobs:
           cp -R core deploy-package/
           [ -d docs ] && cp -R docs deploy-package/ || echo "docs not present, skipping"
           cp -R etc deploy-package/
-
           cp docker-compose.yml deploy-package/
           cp Dockerfile deploy-package/
           cp mvnw deploy-package/
@@ -61,7 +60,17 @@ jobs:
           cp .env deploy-package/
           cp checkstyle.xml deploy-package/
 
-          tar -czf address-service.tar.gz -C deploy-package .
+          cd deploy-package
+          tar -czf ../address-service.tar.gz .
+
+      - name: Check tar file exists
+        run: |
+          if [ ! -f address-service.tar.gz ]; then
+            echo "address-service.tar.gz NOT FOUND"
+            exit 1
+          fi
+          echo "✅ TAR file generated:"
+          ls -lh address-service.tar.gz
 
       - name: Copy archive to VPS
         uses: appleboy/scp-action@master
@@ -86,6 +95,9 @@ jobs:
             set -xe
 
             cd ${{ secrets.VPS_DEPLOY_DIR }}
+
+            echo "Arquivos disponíveis antes de extrair:"
+            ls -lah
 
             echo "Parando containers antigos..."
             docker compose down || true
