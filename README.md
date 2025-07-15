@@ -19,7 +19,6 @@ Veja o diagrama abaixo para visualizar a organização da solução:
 
 Mais detalhes das decisões técnicas podem ser encontrados na [ADR-001 - Arquitetura do Address Service](docs/adr/ADR-001-architecture-address-service.md).
 
----
 
 ## 🛠️ Stacks
 
@@ -41,7 +40,6 @@ Mais detalhes das decisões técnicas podem ser encontrados na [ADR-001 - Arquit
     - JUnit
     - Mockito
 
----
 
 ## 🚀 Como Iniciar
 
@@ -53,7 +51,6 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 - [Docker Compose](https://docs.docker.com/compose/)
 
----
 
 ### ▶️ Executando o Projeto
 
@@ -79,7 +76,6 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 5. Após acessar o endpoint de cadastro no <a href="http://localhost:8887/v1/api/swagger-ui/index.html#/Cadastro%20de%20Usu%C3%A1rio/signUp" target="_blank" title="Clique e navegue!">Swagger</a> e criar um novo usuário, autentique-se e faça buscas de CEPs variados. Você poderá acompanhar as métricas no <a href="http://localhost:3000" target="_blank" title="Clique para acessar o Grafana!">Grafana</a>.
 
----
 
 ## 🔎 Observabilidade
 
@@ -91,7 +87,6 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 </a>
 
----
 
 ### Logs com Grafana & Loki
 
@@ -103,7 +98,6 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 [Dados de acesso ao Grafana aqui!](docs/adr/data-access-grafana.md)
 
----
 
 ### Redis Commander
 
