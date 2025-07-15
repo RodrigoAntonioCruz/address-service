@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <name>Address Service</name>
-    <description>Este é um arquétipo de ‘software’ que usa Arquitetura Limpa.</description>
+    <description>Responsável pelas configurações e pelo gerenciamento do contexto da aplicação.</description>
 
     <modules>
         <module>core/domain</module>
@@ -138,6 +138,15 @@
                     <configuration>
                         <source>${maven.compiler.source}</source>
                         <target>${maven.compiler.target}</target>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>${maven.resources.plugin.version}</version>
+                    <configuration>
+                        <encoding>${project.build.sourceEncoding}</encoding>
                     </configuration>
                 </plugin>
 
