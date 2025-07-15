@@ -4,41 +4,37 @@ import com.example.adapter.input.controller.utils.Constants;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.security.SecurityScheme;
+import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.tags.Tag;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Configuration
 public class OpenApiConfiguration {
 
     @Value("${spring.app.version}")
-    private String appVersion;
+    private String version;
 
-    @Value("${openapi.server.urls}")
-    private String openApiServerUrls;
+    @Value("${openapi.server.url}")
+    private String server;
 
     @Bean
     public OpenAPI customOpenAPI() {
-
-        List<Server> servers = Arrays.stream(openApiServerUrls.split(","))
-                .map(url -> new Server().url(url))
-                .collect(Collectors.toList());
-
         return new OpenAPI()
-                .components(new Components().addSecuritySchemes(Constants.BASIC_AUTH_SECURITY_SCHEME,
-                        new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic")))
                 .info(new Info()
                         .title("API de Consulta de Endereços")
                         .description("API responsável por realizar consultas de endereços brasileiros a partir do CEP informado.")
-                        .version(appVersion))
-                .servers(servers)
+                        .version(version))
+                .servers(List.of(new Server().url(server)))
+                .components(new Components()
+                        .addSecuritySchemes(Constants.BASIC_AUTH_SECURITY_SCHEME,
+                                new SecurityScheme()
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("basic")))
                 .tags(List.of(
                         new Tag()
                                 .name("Cadastro de Usuário")
