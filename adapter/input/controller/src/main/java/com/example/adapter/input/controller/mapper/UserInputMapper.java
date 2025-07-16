@@ -13,6 +13,7 @@ import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
 public interface UserInputMapper {
+    @Mapping(target = "id", ignore = true)
     @Mapping(target = "password", source = "password", qualifiedByName = "toPassword")
     @Mapping(target = "cpf", source = "cpf", qualifiedByName = "toCpf")
     @Mapping(target = "email", source = "email", qualifiedByName = "toEmail")
