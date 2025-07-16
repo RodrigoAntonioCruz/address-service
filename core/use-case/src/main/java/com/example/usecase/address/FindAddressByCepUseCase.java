@@ -59,7 +59,7 @@ public class FindAddressByCepUseCase implements FindAddressByCepInputPort {
         return handleAddressOrAlias(cepVO.value(), cep, address);
     }
 
-    private Address handleAddressOrAlias(String normalizedCep, String originalCep, Address address) {
+    protected Address handleAddressOrAlias(String normalizedCep, String originalCep, Address address) {
         if (!normalizedCep.equals(address.cep())) {
             findAddressByCepOutputPort.saveAddressAlias(originalCep, address);
 
