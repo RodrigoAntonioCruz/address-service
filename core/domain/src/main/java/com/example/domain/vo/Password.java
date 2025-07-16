@@ -3,37 +3,38 @@ package com.example.domain.vo;
 import com.example.domain.utils.Constants;
 
 import java.util.Objects;
+
 public class Password {
     private final String value;
 
-    public Password(String value) {
+    public Password(final String value) {
         if (Objects.isNull(value) || value.isBlank()) {
             throw new IllegalArgumentException(Constants.PASSWORD_NULL_OR_BLANK);
         }
 
-        value = value.trim();
+        final String trimmedValue = value.trim();
 
-        if (isEncrypted(value)) {
-            this.value = value;
+        if (isEncrypted(trimmedValue)) {
+            this.value = trimmedValue;
             return;
         }
 
-        if (value.length() < Constants.MINIMUM_LENGTH) {
+        if (trimmedValue.length() < Constants.MINIMUM_LENGTH) {
             throw new IllegalArgumentException(Constants.PASSWORD_MIN_LENGTH);
         }
 
-        if (!value.matches(Constants.PASSWORD_COMPLEXITY_REGEX)) {
+        if (!trimmedValue.matches(Constants.PASSWORD_COMPLEXITY_REGEX)) {
             throw new IllegalArgumentException(Constants.PASSWORD_COMPLEXITY);
         }
 
-        this.value = value;
+        this.value = trimmedValue;
     }
 
-    private boolean isEncrypted(String value) {
-        return value.startsWith("{bcrypt}") ||
-                value.startsWith("$2a$") ||
-                value.startsWith("$2b$") ||
-                value.startsWith("$2y$");
+    private boolean isEncrypted(final String value) {
+        return value.startsWith(Constants.BCRYPT_PREFIX)
+                || value.startsWith(Constants.BCRYPT_PREFIX_2A)
+                || value.startsWith(Constants.BCRYPT_PREFIX_2B)
+                || value.startsWith(Constants.BCRYPT_PREFIX_2Y);
     }
 
     public String getValue() {
@@ -46,9 +47,13 @@ public class Password {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Password that)) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Password that)) {
+            return false;
+        }
         return Objects.equals(value, that.value);
     }
 

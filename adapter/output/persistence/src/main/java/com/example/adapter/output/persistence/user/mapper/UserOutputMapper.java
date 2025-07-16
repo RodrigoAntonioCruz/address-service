@@ -32,7 +32,9 @@ public interface UserOutputMapper {
 
     @Named("passwordToString")
     default String passwordToString(Password password, @Context PasswordEncoder encoder) {
-        if (Objects.isNull(password)) return null;
+        if (Objects.isNull(password)) {
+            return null;
+        }
         String raw = password.getValue();
         if (raw.startsWith(Constants.BCRYPT_PREFIX) || raw.startsWith(Constants.BCRYPT_PREFIX_B)) {
             return raw;

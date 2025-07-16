@@ -15,7 +15,7 @@ class UserTest {
     @Test
     @DisplayName("Deve criar User com sucesso quando todos os campos são válidos")
     void shouldCreateUserSuccessfully() {
-        User user = new User(
+        final User user = new User(
                 Fixtures.VALID_ID,
                 Fixtures.VALID_USERNAME,
                 Fixtures.VALID_PASSWORD,
@@ -142,7 +142,7 @@ class UserTest {
     @Test
     @DisplayName("Deve permitir alteração de campos do User através dos setters")
     void shouldChangeFieldsUsingSetters() {
-        User user = getUser();
+        final User user = getUser();
 
         assertThat(user.getId()).isEqualTo(Fixtures.VALID_ID_UPDATED);
         assertThat(user.getUsername()).isEqualTo(Fixtures.VALID_USERNAME_UPDATED);
@@ -228,8 +228,48 @@ class UserTest {
                 .hasMessage(Constants.PASSWORD_COMPLEXITY);
     }
 
+    @Test
+    @DisplayName("Deve validar equals e hashCode do User")
+    void shouldValidateEqualsAndHashCode() {
+        final User userOne = new User(
+                Fixtures.VALID_ID,
+                Fixtures.VALID_USERNAME,
+                Fixtures.VALID_PASSWORD,
+                Fixtures.VALID_NAME,
+                Fixtures.VALID_CPF,
+                Fixtures.VALID_EMAIL,
+                Fixtures.VALID_ROLE
+        );
+
+        final User userTwo = new User(
+                Fixtures.VALID_ID,
+                Fixtures.VALID_USERNAME,
+                Fixtures.VALID_PASSWORD,
+                Fixtures.VALID_NAME,
+                Fixtures.VALID_CPF,
+                Fixtures.VALID_EMAIL,
+                Fixtures.VALID_ROLE
+        );
+
+        final User userThree = new User(
+                Fixtures.VALID_ID_UPDATED,
+                Fixtures.VALID_USERNAME,
+                Fixtures.VALID_PASSWORD,
+                Fixtures.VALID_NAME,
+                Fixtures.VALID_CPF,
+                Fixtures.VALID_EMAIL,
+                Fixtures.VALID_ROLE
+        );
+
+        assertThat(userOne).isEqualTo(userTwo);
+        assertThat(userOne.hashCode()).isEqualTo(userTwo.hashCode());
+        assertThat(userOne).isNotEqualTo(userThree);
+        assertThat(userOne).isNotEqualTo(null);
+        assertThat(userOne).isNotEqualTo("string");
+    }
+
     private static User getUser() {
-        User user = new User(
+        final User user = new User(
                 Fixtures.VALID_ID,
                 Fixtures.VALID_USERNAME,
                 Fixtures.VALID_PASSWORD,

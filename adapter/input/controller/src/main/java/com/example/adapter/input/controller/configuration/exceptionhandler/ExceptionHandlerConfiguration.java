@@ -62,7 +62,7 @@ public class ExceptionHandlerConfiguration {
 
     @ExceptionHandler({ClientAbortException.class})
     public ResponseEntity<Object> handleClientAbortException(ClientAbortException e, HttpServletRequest request) {
-        return getException(HttpStatus.valueOf(499), HttpStatus.CONFLICT.getReasonPhrase(), ExceptionResolver.getRootException(e), request, Constants.LOG_METHOD_CLIENT_ABORT_EXCEPTION);
+        return getException(HttpStatus.valueOf(HttpStatus.CONFLICT.value()), HttpStatus.CONFLICT.getReasonPhrase(), ExceptionResolver.getRootException(e), request, Constants.LOG_METHOD_CLIENT_ABORT_EXCEPTION);
     }
 
     @ExceptionHandler({NotFoundException.class})

@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThat;
  class AddressTest {
     @Test
     void shouldCreateAddressWithAllFields() {
-        Address address = Fixtures.validAddress();
+        final Address address = Fixtures.validAddress();
 
         assertThat(address.cep()).isEqualTo(Fixtures.VALID_CEP);
         assertThat(address.street()).isEqualTo(Fixtures.VALID_STREET);

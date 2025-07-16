@@ -23,13 +23,13 @@ public class User implements Serializable {
     private Email email;
     private Role role;
 
-    public User(String id,
-                String username,
-                Password password,
-                String name,
-                Cpf cpf,
-                Email email,
-                Role role) {
+    public User(final String id,
+                final String username,
+                final Password password,
+                final String name,
+                final Cpf cpf,
+                final Email email,
+                final Role role) {
 
         this.id = id;
         this.username = username;
@@ -91,39 +91,43 @@ public class User implements Serializable {
         return role;
     }
 
-    public void setId(String id) {
+    public void setId(final String id) {
         this.id = id;
     }
 
     // setters sem validação, pois validação está no construtor
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
-    public void setPassword(Password password) {
+    public void setPassword(final Password password) {
         this.password = password;
     }
 
-    public void setName(String name) {
+    public void setName(final String name) {
         this.name = name;
     }
 
-    public void setCpf(Cpf cpf) {
+    public void setCpf(final Cpf cpf) {
         this.cpf = cpf;
     }
 
-    public void setEmail(Email email) {
+    public void setEmail(final Email email) {
         this.email = email;
     }
 
-    public void setRole(Role role) {
+    public void setRole(final Role role) {
         this.role = role;
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof User user)) return false;
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof User user)) {
+            return false;
+        }
         return Objects.equals(id, user.id);
     }
 

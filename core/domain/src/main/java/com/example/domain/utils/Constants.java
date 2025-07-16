@@ -5,6 +5,24 @@ public class Constants {
 
     private Constants() {
     }
+    public static final String BCRYPT_PREFIX = "{bcrypt}";
+    public static final String BCRYPT_PREFIX_2A = "$2a$";
+    public static final String BCRYPT_PREFIX_2B = "$2b$";
+    public static final String BCRYPT_PREFIX_2Y = "$2y$";
+    public static final int CPF_LENGTH = 11;
+    public static final int FIRST_DIGITS_LENGTH = 9;
+    public static final int INVALID_CPF_THRESHOLD = 9;
+    public static final int MIN_DIGIT_ZERO = 0;
+    public static final int WEIGHT_11 = 11;
+    public static final int WEIGHT_10 = 10;
+    public static final int WEIGHT_9 = 9;
+    public static final int WEIGHT_8 = 8;
+    public static final int WEIGHT_7 = 7;
+    public static final int WEIGHT_6 = 6;
+    public static final int WEIGHT_5 = 5;
+    public static final int WEIGHT_4 = 4;
+    public static final int WEIGHT_3 = 3;
+    public static final int WEIGHT_2 = 2;
     public static final String DIGIT_REGEX = "\\D";
     public  static final String CEP_REGEX = "\\d{8}";
     public  static final char ZERO_CHAR = '0';

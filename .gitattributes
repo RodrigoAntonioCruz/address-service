@@ -26,3 +26,15 @@
 *.jpeg binary
 *.gif binary
 *.pdf binary
+
+# Normaliza finais de linha automaticamente para arquivos de texto
+* text=auto
+
+# Estratégia de merge para arquivos de lock
+*.lock merge=ours
+
+# Expansão de palavras-chave (opcional, remova se não for necessário)
+*.txt ident
+
+# Diferenças personalizadas para JSON
+*.json diff=json
