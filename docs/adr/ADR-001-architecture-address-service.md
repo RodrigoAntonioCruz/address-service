@@ -15,7 +15,7 @@ Para atender esses requisitos, o serviço utiliza arquitetura modular seguindo *
 ### Tecnologias
 
 - **Java 17** — Linguagem padrão para o serviço.
-- **Spring Boot 3.x** — Framework principal para acelerar o desenvolvimento.
+- **Spring Boot 3.0.2** — Framework principal para acelerar o desenvolvimento.
 - **Spring Security** — Autenticação e controle de acesso.
 - **Spring Cloud OpenFeign** — Cliente HTTP declarativo usado para integrar com serviços externos (ViaCEP).
 - **Resilience4j** — Circuit Breaker e Retry para tornar as chamadas externas mais resilientes.
@@ -26,7 +26,7 @@ Para atender esses requisitos, o serviço utiliza arquitetura modular seguindo *
 - **Swagger/OpenAPI** — Documentação e testes da API REST.
 - **Prometheus & Grafana** — Observabilidade e métricas.
 - **Loki & Grafana** — Centralização e visualização de logs.
-- **JUnit & Mockito** — Testes unitários e mocks.
+- **JUnit & Mockito** — Testes unitários, integrados e mocks.
 
 ### Estrutura do Projeto
 

@@ -96,8 +96,7 @@ Para rodar esta aplicação, você deve ter instalado em seu computador:
 
 </a>
 
-[Dados de acesso ao Grafana aqui!](docs/adr/data-access-grafana.md)
-
+[Credenciais do Dashboard do Grafana aqui](docs/adr/credentials-grafana.md)
 
 ### Redis Commander
 
@@ -109,4 +108,4 @@ Caso queira acompanhar os dados armazenados no Redis, basta acessar a interface 
 
 </a>
 
-[Dados de acesso ao Redis Commander aqui!](docs/adr/data-access-redis.md)
+[Credenciais do Redis Commander aqui](docs/adr/credentials-redis.md)

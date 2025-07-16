@@ -19,6 +19,8 @@ public class Constants {
     /**
      * LOG_METHOD
      * */
+    public static final String LOG_METHOD_BAD_GATEWAY_EXCEPTION = "handleBadGateway";
+    public static final String LOG_METHOD_SERVICE_UNAVAILABLE_EXCEPTION = "handleServiceUnavailable";
     public static final String LOG_METHOD_FIND_ADDRESS = "findAddressByCep";
     public static final String LOG_METHOD_BUSINESS_EXCEPTION = "BusinessException";
     public static final String LOG_METHOD_BIND_EXCEPTION = "BindException";

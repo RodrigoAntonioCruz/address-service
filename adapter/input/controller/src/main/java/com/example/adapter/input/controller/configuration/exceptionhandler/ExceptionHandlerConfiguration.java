@@ -3,6 +3,7 @@ package com.example.adapter.input.controller.configuration.exceptionhandler;
 import com.example.adapter.input.controller.exception.BusinessException;
 import com.example.adapter.input.controller.exception.ExceptionResolver;
 import com.example.adapter.input.controller.utils.Constants;
+import com.example.adapter.output.client.exception.ServiceUnavailableException;
 import com.example.usecase.exception.DuplicatedException;
 import com.example.usecase.exception.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -34,7 +35,6 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static java.util.Optional.ofNullable;
-
 
 @Slf4j
 @ControllerAdvice
@@ -123,6 +123,10 @@ public class ExceptionHandlerConfiguration {
         return getException(HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST.getReasonPhrase(), ExceptionResolver.getRootException(e), request, Constants.LOG_METHOD_NUMBER_FORMAT_EXCEPTION);
     }
 
+    @ExceptionHandler(ServiceUnavailableException.class)
+    public ResponseEntity<Object> handleServiceUnavailable(ServiceUnavailableException e, HttpServletRequest request) {
+        return getException(HttpStatus.SERVICE_UNAVAILABLE, HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase(), e.getMessage(), request, Constants.LOG_METHOD_SERVICE_UNAVAILABLE_EXCEPTION);
+    }
     private String getTraceID() {
         return ofNullable(MDC.get(Constants.TRACE_ID_KEY)).orElse(Constants.LOG_METHOD_NOT_AVAILABLE_EXCEPTION);
     }
