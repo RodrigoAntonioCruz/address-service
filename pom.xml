@@ -51,7 +51,8 @@
         <springdoc-openapi.version>2.0.4</springdoc-openapi.version>
         <swagger-annotations.version>1.6.9</swagger-annotations.version>
         <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
-        <coverage.value>0.90</coverage.value>
+        <lines.coverage.value>0.90</lines.coverage.value>
+        <branch.coverage.value>0.90</branch.coverage.value>
 
         <jacoco.excludes>
             com/example/adapter/input/controller/dto/**,
@@ -64,6 +65,11 @@
             com/example/domain/utils/**,
             com/example/usecase/exception/**,
             com/example/usecase/**/ports/**,
+            com/example/adapter/output/client/utils/**,
+            com/example/adapter/output/client/dto/**,
+            com/example/adapter/output/client/mapper/**,
+            com/example/adapter/output/client/exception/**,
+            com/example/adapter/output/client/configuration/**,
             com/example/adapter/output/persistence/**/entity/**,
             com/example/adapter/output/persistence/**/mapper/**,
             com/example/adapter/output/persistence/**/configuration/**,
@@ -230,7 +236,12 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>${coverage.value}</minimum>
+                                            <minimum>${lines.coverage.value}</minimum>
+                                        </limit>
+                                        <limit>
+                                            <counter>BRANCH</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${branch.coverage.value}</minimum>
                                         </limit>
                                     </limits>
                                 </rule>
