@@ -66,7 +66,7 @@
             com/example/adapter/output/client/exception/**,
             com/example/adapter/output/client/configuration/**,
             com/example/adapter/output/security/dto/**,
-            com/example/adapter/output/security/mapper/**
+            com/example/adapter/output/security/mapper/**,
             com/example/adapter/output/persistence/**/mapper/**,
             com/example/adapter/output/persistence/**/entity/**,
             com/example/adapter/output/persistence/**/repository/**,
