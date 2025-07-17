@@ -55,30 +55,28 @@
         <branch.coverage.value>0.90</branch.coverage.value>
 
         <jacoco.excludes>
+            com/example/domain/vo/**,
+            com/example/domain/enums/**,
+            com/example/domain/utils/**,
+            com/example/usecase/**/ports/**,
+            com/example/usecase/exception/**,
+            com/example/adapter/output/client/dto/**,
+            com/example/adapter/output/client/utils/**,
+            com/example/adapter/output/client/mapper/**,
+            com/example/adapter/output/client/exception/**,
+            com/example/adapter/output/client/configuration/**,
+            com/example/adapter/output/security/dto/**,
+            com/example/adapter/output/security/mapper/**
+            com/example/adapter/output/persistence/**/mapper/**,
+            com/example/adapter/output/persistence/**/entity/**,
+            com/example/adapter/output/persistence/**/repository/**,
+            com/example/adapter/output/persistence/**/configuration/**,
             com/example/adapter/input/controller/dto/**,
             com/example/adapter/input/controller/utils/**,
             com/example/adapter/input/controller/mapper/**,
             com/example/adapter/input/controller/exception/**,
             com/example/adapter/input/controller/configuration/**,
-            com/example/domain/vo/**,
-            com/example/domain/enums/**,
-            com/example/domain/utils/**,
-            com/example/usecase/exception/**,
-            com/example/usecase/**/ports/**,
-            com/example/adapter/output/client/utils/**,
-            com/example/adapter/output/client/dto/**,
-            com/example/adapter/output/client/mapper/**,
-            com/example/adapter/output/client/exception/**,
-            com/example/adapter/output/client/configuration/**,
-            com/example/adapter/output/persistence/**/entity/**,
-            com/example/adapter/output/persistence/**/mapper/**,
-            com/example/adapter/output/persistence/**/configuration/**,
-            com/example/adapter/output/persistence/**/repository/**,
-            com/example/adapter/output/security/dto/**,
-            com/example/adapter/output/security/mapper/**
         </jacoco.excludes>
-
-
     </properties>
 
     <dependencyManagement>
